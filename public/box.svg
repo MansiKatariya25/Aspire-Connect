@@ -1,0 +1,39 @@
+<svg width="143" height="166" viewBox="0 0 143 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_13_545)">
+<mask id="mask0_13_545" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="143" height="166">
+<path d="M143 0H0V166H143V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_13_545)">
+<mask id="mask1_13_545" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-3" y="0" width="166" height="169">
+<path d="M-3 0H163V169H-3V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_13_545)">
+<path d="M71 56L48 42L24 55M71 56V82L48 96M71 56L48 69M48 96L24 83V55M48 96V69M24 55L48 69" stroke="white" stroke-opacity="0.4" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M24 83L48 69M48 69L71 83M48 69V42" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M95 70L72 56L48 69M95 70V96L72 110M95 70L72 83M72 110L48 97V69M72 110V83M48 69L72 83" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M48 97L72 83M72 83L95 97M72 83V56" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M142 97L119 83L95 96M142 97V123L119 137M142 97L119 110M119 137L95 124V96M119 137V110M95 96L119 110" stroke="white" stroke-opacity="0.4" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M95 124L119 110M119 110L142 124M119 110V83" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M118 29L95 15L71 28M118 29V55L95 69M118 29L95 42M95 69L71 56V28M95 69V42M71 28C78.8326 32.5007 95 42 95 42" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M71 56L95 42M95 42L118 56M95 42C95 42 95 24.1113 95 15" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M71 111L48 97L24 110M71 111V137L48 151M71 111L48 124M48 151L24 138V110M48 151V124M24 110L48 124" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M24 138L48 124M48 124L71 138M48 124V97" stroke="white" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_13_545">
+<rect width="143" height="166" fill="white"/>
+</clipPath>
+</defs>
+</svg>

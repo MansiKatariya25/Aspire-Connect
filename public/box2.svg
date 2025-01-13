@@ -1,0 +1,96 @@
+<svg width="143" height="166" viewBox="0 0 143 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_13_603)">
+<mask id="mask0_13_603" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="143" height="166">
+<path d="M143 0H0V166H143V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_13_603)">
+<mask id="mask1_13_603" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-3" y="0" width="166" height="169">
+<path d="M-3 0H163V169H-3V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_13_603)">
+<path d="M71 56L48 42L24 55M71 56V82L48 96M71 56L48 69M48 96L24 83V55M48 96V69M24 55L48 69" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M24 83L48 69M48 69L71 83M48 69V42" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M95 70L72 56L48 69M95 70V96L72 110M95 70L72 83M72 110L48 97V69M72 110V83M48 69L72 83" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M48 97L72 83M72 83L95 97M72 83V56" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M142 97L119 83L95 96M142 97V123L119 137M142 97L119 110M119 137L95 124V96M119 137V110M95 96L119 110" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M95 124L119 110M119 110L142 124M119 110V83" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M118 29L95 15L71 28M118 29V55L95 69M118 29L95 42M95 69L71 56V28M95 69V42M71 28C78.8326 32.5007 95 42 95 42" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M71 56L95 42M95 42L118 56M95 42C95 42 95 24.1113 95 15" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+<path d="M71 111L48 97L24 110M71 111V137L48 151M71 111L48 124M48 151L24 138V110M48 151V124M24 110L48 124" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+<g opacity="0.2">
+<path d="M24 138L48 124M48 124L71 138M48 124V97" stroke="#FF8C42" stroke-width="0.324995" stroke-miterlimit="10"/>
+</g>
+</g>
+<mask id="mask2_13_603" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="9" y="1" width="143" height="166">
+<path d="M152 1H9V167H152V1Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_13_603)">
+<mask id="mask3_13_603" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-178" y="-62" width="517" height="292">
+<path d="M-178 -62H339V230H-178V-62Z" fill="white"/>
+</mask>
+<g mask="url(#mask3_13_603)">
+<mask id="mask4_13_603" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-178" y="-62" width="517" height="292">
+<path d="M-178 -62H339V230H-178V-62Z" fill="white"/>
+</mask>
+<g mask="url(#mask4_13_603)">
+<path d="M46 104V13L66 2V93L46 104Z" fill="white"/>
+<path d="M46 104V13L66 2V93L46 104Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M66 93V2L144 47V138L66 93Z" fill="white"/>
+<path d="M66 93V2L144 47V138L66 93Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M124 149L46 103L66 92L144 138L124 149Z" fill="white"/>
+<path d="M124 149L46 103L66 92L144 138L124 149Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M124 149V58L46 13V104L124 149Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<g opacity="0.99">
+<path d="M46 13L124 59L144 48L66 2L46 13Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+</g>
+<path d="M124 149V58L144 47V138L124 149Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M36 120V52L56 41V109L36 120Z" fill="white"/>
+<path d="M36 120V52L56 41V109L36 120Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M56 110V42L115 76V144L56 110Z" fill="white"/>
+<path d="M56 110V42L115 76V144L56 110Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M95 154L37 120L56 109L115 143L95 154Z" fill="white"/>
+<path d="M95 154L37 120L56 109L115 143L95 154Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M95 155V87L36 53V121L95 155Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<g opacity="0.991669">
+<path d="M36 52L95 86L114 75L55 41L36 52Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+</g>
+<path d="M95 154V86L115 75V143L95 154Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M27 138V92L47 81V127L27 138Z" fill="white"/>
+<path d="M27 138V92L47 81V127L27 138Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M47 126V81L86 104V149L47 126Z" fill="white"/>
+<path d="M47 126V81L86 104V149L47 126Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M66 160L27 137L47 126L86 149L66 160Z" fill="white"/>
+<path d="M66 160L27 137L47 126L86 149L66 160Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M66 160V115L27 92V137L66 160Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<g opacity="0.998331">
+<path d="M27 92L66 115L86 104L47 81L27 92Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+</g>
+<path d="M66 161V115L86 104V150L66 161Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M17 155V132L37 121V144L17 155Z" fill="white"/>
+<path d="M17 155V132L37 121V144L17 155Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M37 144V121L57 132V155L37 144Z" fill="white"/>
+<path d="M37 144V121L57 132V155L37 144Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M37 166L17 155L37 143L56 154L37 166Z" fill="white"/>
+<path d="M37 166L17 155L37 143L56 154L37 166Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M37 166V143L17 132V155L37 166Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M17 132L37 144L56 133L37 121L17 132Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+<path d="M36 166V143L56 132V155L36 166Z" stroke="#FF8C42" stroke-width="0.269424" stroke-linejoin="bevel"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_13_603">
+<rect width="143" height="166" fill="white"/>
+</clipPath>
+</defs>
+</svg>
