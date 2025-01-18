@@ -2,13 +2,14 @@ package com.aspireconnect.AspireConnect.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.aspireconnect.AspireConnect.model.User;
 import com.aspireconnect.AspireConnect.service.UserService;
+
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,6 +21,8 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     // Endpoint to register a new user
+
+    
     @PostMapping("/auth/register")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
@@ -64,3 +67,4 @@ public class UserController {
 
 
 }
+
