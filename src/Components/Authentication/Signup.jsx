@@ -24,12 +24,12 @@ function Signup() {
                   htmlFor="First Name"
                   className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
                 >
-                  First Nme
+                  First Name
                 </label>
                 <input
                   type="text"
                   id="email"
-                  placeholder="john.doe@gmail.com"
+                  placeholder="Jhon"
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
@@ -43,7 +43,7 @@ function Signup() {
                 <input
                   type="text"
                   id="email"
-                  placeholder="john.doe@gmail.com"
+                  placeholder="Doe"
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
@@ -63,20 +63,7 @@ function Signup() {
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
-              <div className="relative border w-[50%] border-gray-500 rounded-md">
-                <label
-                  htmlFor="Phone Number"
-                  className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
-                >
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="email"
-                  placeholder="john.doe@gmail.com"
-                  className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
-                />
-              </div>
+        
             </div>
             <div className="relative border w-full border-gray-500 rounded-md">
               <label
