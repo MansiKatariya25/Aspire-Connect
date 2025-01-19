@@ -10,6 +10,9 @@ import com.aspireconnect.AspireConnect.model.Otp;
 import com.aspireconnect.AspireConnect.model.User;
 import com.aspireconnect.AspireConnect.service.OtpService;
 import com.aspireconnect.AspireConnect.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -79,5 +82,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired OTP.");
         }
     }
+    @GetMapping("path")
+    public String getMethodName(@RequestParam String param) {
+        return new String();
+    }
+    
 
 }
