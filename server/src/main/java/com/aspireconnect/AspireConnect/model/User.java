@@ -11,6 +11,7 @@ public class User {
     private String lname;
     private String email;
     private String password;
+    private String role;
 
     // Default constructor
     public User() {
@@ -65,6 +66,16 @@ public class User {
         this.password = password;
     }
 
+
+    
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
     // toString method (optional, for debugging/logging purposes)
     @Override
     public String toString() {
@@ -77,8 +88,3 @@ public class User {
                 '}';
     }
 
-    public User orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
-    }
-}

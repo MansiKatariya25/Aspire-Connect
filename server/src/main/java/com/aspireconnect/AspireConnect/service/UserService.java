@@ -23,13 +23,14 @@ public class UserService {
                 .orElse(null);
     }
 
-    public User findByemail(String email) {
-        return userRepository.findByEmail(email).orElse(null);
-    }
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElse(null);
+
 
     public User updatePass(String pass, String email) {
         try {
-            User user = findByemail(email);
+            User user = getUserByEmail(email);
             user.setPassword(pass);
             return userRepository.save(user);
         } catch (Exception e) {
