@@ -8,7 +8,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.aspireconnect.AspireConnect.model.Otp;
+
 import com.aspireconnect.AspireConnect.repository.OtpRepo;
+
 import com.aspireconnect.AspireConnect.util.OtpUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class OtpService {
     private final OtpRepo otpRepo;
 
     public void sendOtp(String email) {
+
         String otp = OtpUtil.generateOtp();
         LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(5);
 
@@ -48,7 +51,7 @@ public class OtpService {
             Otp otpVerification = otpVerificationOptional.get();
             if (otpVerification.getOtp().equals(otp) &&
                     otpVerification.getExpiryTime().isAfter(LocalDateTime.now())) {
-                            return true;
+                return true;
             }
         }
         return false;

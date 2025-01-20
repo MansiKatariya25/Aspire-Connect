@@ -29,6 +29,10 @@ public class UserController {
         try {
             String pass = passwordEncoder.encode(user.getPassword());
             user.setPassword(pass);
+            User  existingUser = userService.getUserByEmail(user.getEmail());
+            if (existingUser != null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Already Exists");
+            }
             User result = userService.createUser(user);
             return ResponseEntity.ok(result); // HTTP 200 OK
         } catch (Exception e) {
@@ -60,6 +64,10 @@ public class UserController {
     public ResponseEntity<?> forgotPassword(@RequestBody Otp entity) {
         try {
             String email = entity.getEmail();
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+            }
             otpservice.sendOtp(email);
             return ResponseEntity.ok("OTP sent to " + email);
 
@@ -71,7 +79,7 @@ public class UserController {
 
     @PostMapping("/auth/verify-otp")
     public ResponseEntity<String> verifyOtp(@RequestBody Otp entity) {
-         boolean isVerified = otpservice.verifyOtp(entity.getEmail(), entity.getOtp());
+        boolean isVerified = otpservice.verifyOtp(entity.getEmail(), entity.getOtp());
 
         if (isVerified) {
             return ResponseEntity.ok("OTP verified successfully.");
