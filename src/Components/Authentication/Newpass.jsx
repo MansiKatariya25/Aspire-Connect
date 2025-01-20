@@ -17,7 +17,7 @@ function Newpass() {
               for your account.
             </p>
           </div>
-
+          <form onSubmit={handleupdate}>
           <div className="flex flex-col gap-4">
             <div className="relative border w-[90%] border-gray-500 rounded-md">
               <label
@@ -52,6 +52,7 @@ function Newpass() {
             Set Password
           </p>
         </div>
+        </form>
         <div className="right w-[50%]">
           <img
             src="newpass.png"

@@ -1,6 +1,31 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Signup() {
+  const [Fname, SetFname] = useState("");
+  const [Lname, SetLname] = useState("");
+  const [Pass, SetPass] = useState("");
+  const [Email, SetEmail] = useState("");
+
+  const handlesignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/users/auth/register", {
+        fname: Fname,
+        lname: Lname,
+        password: Pass,
+        email: Email,
+      });
+      if (response) {
+        alert("User registered succesfully");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <div className="w-full h-full">
       <p className="font-Inknut text-xl p-8 flex justify-end ">
@@ -17,96 +42,125 @@ function Signup() {
               Let’s get you all st up so you can access your personal account.
             </p>
           </div>
-          <div className="flex flex-col gap-6">
-            <div className="flex gap-4 w-full">
-              <div className="relative border w-[50%] border-gray-500 rounded-md">
+          <form onSubmit={handlesignup}>
+            <div className="flex flex-col gap-6">
+              <div className="flex gap-4 w-full">
+                <div className="relative border w-[50%] border-gray-500 rounded-md">
+                  <label
+                    htmlFor="First Name"
+                    className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
+                  >
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    id="fname"
+                    placeholder="Jhon"
+                    value={Fname}
+                    onChange={(e) => SetFname(e.target.value)}
+                    className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                  />
+                </div>
+                <div className="relative border w-[50%] border-gray-500 rounded-md">
+                  <label
+                    htmlFor="Last Name"
+                    className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
+                  >
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    id="lname"
+                    placeholder="Doe"
+                    value={Lname}
+                    onChange={(e) => SetLname(e.target.value)}
+                    className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-4 w-full">
+                <div className="relative border w-[50%] border-gray-500 rounded-md">
+                  <label
+                    htmlFor="First Name"
+                    className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="john.doe@gmail.com"
+                    value={Email}
+                    onChange={(e) => SetEmail(e.target.value)}
+                    className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                  />
+                </div>
+              </div>
+              <div className="relative border w-full border-gray-500 rounded-md">
                 <label
-                  htmlFor="First Name"
+                  htmlFor="password"
                   className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
                 >
-                  First Name
+                  Password
                 </label>
                 <input
-                  type="text"
-                  id="email"
-                  placeholder="Jhon"
+                  type="password"
+                  id="password"
+                  value={Pass}
+                  onChange={(e) => SetPass(e.target.value)}
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
-              <div className="relative border w-[50%] border-gray-500 rounded-md">
+              <div className="relative border w-full border-gray-500 rounded-md">
                 <label
-                  htmlFor="Last Name"
+                  htmlFor="password"
                   className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
                 >
-                  Last Name
+                  Confirm Password
                 </label>
                 <input
-                  type="text"
-                  id="email"
-                  placeholder="Doe"
+                  type="password"
+                  id="cpassword"
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
-            </div>
-            <div className="flex gap-4 w-full">
-              <div className="relative border w-[50%] border-gray-500 rounded-md">
-                <label
-                  htmlFor="First Name"
-                  className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
-                >
-                  Email
-                </label>
-                <input
-                  type="text"
-                  id="email"
-                  placeholder="john.doe@gmail.com"
-                  className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
-                />
+              <div className="flex gap-2">
+                <input type="checkbox" />
+                <p className="text-[14px] font-Poppins">
+                  I agree to all the{" "}
+                  <span className="text-[#FF8682]">Terms</span> and{" "}
+                  <span className="text-[#FF8682]">Privacy Policies</span>
+                </p>
               </div>
-        
-            </div>
-            <div className="relative border w-full border-gray-500 rounded-md">
-              <label
-                htmlFor="password"
-                className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
+              <button
+                type="submit"
+                className="font-Poppins w-full text-center bg-[#FF8C42] text-white p-2 rounded-md"
               >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
-              />
+                Create account
+              </button>
+
+              <p className="text[14px] font-Poppins text-center">
+                Already have an account?
+                <Link to="/login"><span className="text-[#FF8682]">Login</span>{" "}</Link>
+                
+              </p>
+              <hr className="w-full " />
+              <p className="font-Poppins text-[14px] text-gray-400 absolute top-[88vh] right-[28vw] bg-white px-1">
+                Or login with
+              </p>
+              <div className="flex justify-between w-full pt-2">
+                <div className="border border-[#515DEF] rounded-lg p-2 px-14">
+                  <img src="./facebook.svg" className="" />
+                </div>
+                <div className="border border-[#515DEF] rounded-lg p-2 px-14">
+                  <img src="./google.svg" />
+                </div>
+                <div className="border border-[#515DEF] rounded-lg p-2 px-14">
+                  <img src="./apple.svg" />
+                </div>
+              </div>
             </div>
-            <div className="relative border w-full border-gray-500 rounded-md">
-              <label
-                htmlFor="password"
-                className="absolute -top-2.5 left-3 bg-white px-1 text-gray-500 font-Poppins text-[14px]"
-              >
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
-              />
-            </div>
-            <div className="flex gap-2">
-              <input type="checkbox" />
-              <p className="text-[14px] font-Poppins">I agree to all the <span className="text-[#FF8682]">Terms</span> and <span className="text-[#FF8682]">Privacy Policies</span></p>
-            </div>
-            <p className="font-Poppins w-full text-center bg-[#FF8C42] text-white p-2 rounded-md">
-              Create account
-            </p>
-            <p className="text[14px] font-Poppins text-center">Already have an account?<span className="text-[#FF8682]">Login</span> </p>
-            <hr className="w-full "/>
-            <p className="font-Poppins text-[14px] text-gray-400 absolute top-[88vh] right-[28vw] bg-white px-1">Or login with</p>
-            <div className="flex justify-between w-full pt-2">
-              <div className="border border-[#515DEF] rounded-lg p-2 px-14"><img src="./facebook.svg" className=""/></div>
-              <div className="border border-[#515DEF] rounded-lg p-2 px-14"><img src="./google.svg" /></div>
-              <div className="border border-[#515DEF] rounded-lg p-2 px-14"><img src="./apple.svg" /></div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

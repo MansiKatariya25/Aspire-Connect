@@ -1,18 +1,20 @@
 package com.aspireconnect.AspireConnect.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Update;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.aspireconnect.AspireConnect.model.Otp;
 import com.aspireconnect.AspireConnect.model.User;
+import com.aspireconnect.AspireConnect.repository.UserRepo;
 import com.aspireconnect.AspireConnect.service.OtpService;
 import com.aspireconnect.AspireConnect.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,6 +26,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private OtpService otpservice;
+    private UserRepo userRepository;
 
     // Endpoint to register a new user
 
@@ -74,7 +77,7 @@ public class UserController {
 
     @PostMapping("/auth/verify-otp")
     public ResponseEntity<String> verifyOtp(@RequestBody Otp entity) {
-         boolean isVerified = otpservice.verifyOtp(entity.getEmail(), entity.getOtp());
+        boolean isVerified = otpservice.verifyOtp(entity.getEmail(), entity.getOtp());
 
         if (isVerified) {
             return ResponseEntity.ok("OTP verified successfully.");
@@ -82,10 +85,21 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired OTP.");
         }
     }
-    @GetMapping("path")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+
+    @PutMapping("/auth/update-pass")
+    public ResponseEntity<?> newpass(@RequestBody User entity) {
+        try {
+
+            String email = entity.getEmail();
+            String pass = entity.getPassword();
+            String encoded = passwordEncoder.encode(pass);
+            User result = userService.updatePass(encoded, email);
+            return ResponseEntity.ok(result);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+        }
+
     }
-    
 
 }

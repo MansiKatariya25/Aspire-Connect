@@ -11,6 +11,6 @@ import com.aspireconnect.AspireConnect.model.User;
 
 public interface UserRepo extends MongoRepository<User, String> {
 
-    Optional<User> findByEmail(String email);
+ Optional<User> findByEmail(String email);
  
 }
