@@ -61,7 +61,7 @@ function Forgot() {
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
-            <button type="submit" className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <button type="submit" className="font-Poppins w-[90%] cursor-pointer text-center bg-[#FF8C42] text-white p-2 rounded-md">
               Submit
             </button>
           </div>

@@ -1,13 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Newpass() {
+  const [Pass,SetPass] = useState("")
+  const useNav = useNavigate()
 
-  const handleupdate = (e) => {
+  const handleupdate = async (e) => {
     e.preventDefault()
     try {
-      
+      const response = await axios.put('/users/auth/update-pass')
+      if(response){
+        toast.success("Password updated Successfully")
+        useNav('/login')
+      }
     } catch (error) {
-      
+      toast.error(error)
     }
   }
   return (
@@ -38,7 +47,9 @@ function Newpass() {
               <input
                 type="password"
                 id="password"
-                placeholder="Enter pass"
+                value={Pass}
+                onChange={(e)=>(SetPass(e.target.value))}
+                placeholder="Enter Password"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
@@ -51,12 +62,12 @@ function Newpass() {
               </label>
               <input
                 type="password"
-                id="password"
-                placeholder="john.doe@gmail.com"
+                id="cpassword"
+                placeholder="Confirm Password"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
-            <button type="submit" className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <button type="submit" className="font-Poppins w-[90%] cursor-pointer text-center bg-[#FF8C42] text-white p-2 rounded-md">
             Set Password
           </button>
           </div>
