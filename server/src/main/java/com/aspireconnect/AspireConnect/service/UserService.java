@@ -27,7 +27,8 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .orElse(null);
 
-
+    }
+    
     public User updatePass(String pass, String email) {
         try {
             User user = getUserByEmail(email);
@@ -38,4 +39,7 @@ public class UserService {
         }
 
     }
+
+
 }
+

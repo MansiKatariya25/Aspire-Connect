@@ -1,6 +1,15 @@
 import React from "react";
 
 function Newpass() {
+
+  const handleupdate = (e) => {
+    e.preventDefault()
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
   return (
     <div>
       <div className="p-6">
@@ -29,7 +38,7 @@ function Newpass() {
               <input
                 type="password"
                 id="password"
-                placeholder="john.doe@gmail.com"
+                placeholder="Enter pass"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
@@ -47,12 +56,14 @@ function Newpass() {
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
-          </div>
-          <p className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <button type="submit" className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
             Set Password
-          </p>
+          </button>
+          </div>
+          </form>
+          
         </div>
-        </form>
+        
         <div className="right w-[50%]">
           <img
             src="newpass.png"
