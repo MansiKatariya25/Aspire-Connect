@@ -1,6 +1,27 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function Verify() {
+
+  const [Code,SetCode] = useState("")
+  const useNav = useNavigate()
+
+  const handleverify = async(e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post('/users/auth/verify-otp')
+      if(response){
+       toast.success("Otp verified Successfully")
+       useNav('/newpass')
+      }
+    } catch (error) {
+      toast.error(error)
+    }
+  }
+
+
   return (
     <div>
       <div className="p-6">
@@ -10,7 +31,8 @@ function Verify() {
         <div className="left p-8 w-[45%] h-[60vh]  flex flex-col justify-between">
           <div className="flex items-center">
             <img src="back.svg" />
-            <p className="font-Poppins text-[14px]">Back to login</p>
+            <Link toto="/login"><p className="font-Poppins text-[14px]">Back to login</p></Link>
+            
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-[40px] font-Poppins font-medium ">
@@ -20,6 +42,7 @@ function Verify() {
             An authentication code has been sent to your email.
             </p>
           </div>
+          <form onSubmit={handleverify}>
           <div className="flex flex-col gap-10">
             <div className="relative border w-[90%] border-gray-500 rounded-md">
               <label
@@ -30,17 +53,18 @@ function Verify() {
               </label>
               <input
                 type="text"
-                id="email"
-                placeholder="john.doe@gmail.com"
+                id="verify"
+                placeholder="Enter OTP"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
             <p className="text-[14px] font-Poppins">Didn’t receive a code?  <span className="text-[#FF8682]">Resend</span></p>
 
-            <p className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <button className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
               Verify
-            </p>
+            </button>
           </div>
+          </form>
           </div>
         <div className="right w-[50%]">
           <img

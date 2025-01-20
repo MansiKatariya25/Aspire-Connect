@@ -1,6 +1,25 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Forgot() {
+  const [Email,SetEmail] = useState("")
+  const useNav = useNavigate()
+
+  const handleforgot = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/users/auth/forgot-password',{email:Email})
+      if(response){
+        alert("OTP successfully sent to your registered email id")
+        useNav('/verify')
+      }
+
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
     <div className="w-full h-full">
       <div className="p-6">
@@ -10,7 +29,10 @@ function Forgot() {
         <div className="left p-8 w-[45%] h-[75vh]  flex flex-col justify-between">
           <div className="flex items-center">
             <img src="back.svg" />
+            <Link to="/login">
             <p className="font-Poppins text-[14px]">Back to login</p>
+            </Link>
+            
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-[40px] font-Poppins font-medium ">
@@ -21,6 +43,7 @@ function Forgot() {
               recover your password
             </p>
           </div>
+          <form onSubmit={handleforgot}>
           <div className="flex flex-col gap-10">
             <div className="relative border w-[90%] border-gray-500 rounded-md">
               <label
@@ -32,14 +55,17 @@ function Forgot() {
               <input
                 type="email"
                 id="email"
+                value={Email}
+                onChange={(e)=>(SetEmail(e.target.value))}
                 placeholder="john.doe@gmail.com"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
               />
             </div>
-            <p className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <button type="submit" className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
               Submit
-            </p>
+            </button>
           </div>
+          </form>
           <hr className="w-[90%] mt" />
           <p className="font-Poppins text-[14px] text-gray-400 absolute top-[74vh] left-[23vw] bg-white px-1">
             Or login with

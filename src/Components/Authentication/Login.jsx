@@ -1,7 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
+    const [email,SetEmail] = useState("")
+    const [password,SetPass]= useState("")
+    
+    const useNav = useNavigate()
+    const handleLogin = async()=>{
+      try {
+        const response = await axios.post("/users/auth/login",{
+          email:email,
+          password:password
+        })
+        if(response){
+          toast.success("Login Succesfully")
+          useNav("/dashboard")
+        }
+
+      } catch (error) {
+        toast.error(error.response ? error.response.data.message : "Login failed");
+      }
+
+      
+
+    }
+
   return (
     <div className="w-full h-full">
       <div className="p-4">
@@ -29,6 +55,8 @@ function Login() {
                 id="email"
                 placeholder="john.doe@gmail.com"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                value={email}
+                onChange={(e)=>(SetEmail(e.target.value))}
               />
             </div>
             <div className="relative border flex items-center w-[90%] border-gray-500 rounded-md ">
@@ -43,6 +71,8 @@ function Login() {
                 id="password"
                 placeholder="Enter your password"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                value={password}
+                onChange={(e)=>(SetPass(e.target.value))}
               />
               <img src="./hide.png" className="w-[20px] h-[20px] mr-2" />
             </div>
@@ -51,16 +81,19 @@ function Login() {
                 <input type="checkbox" />
                 <p className="text-[14px] font-Poppins">Remember me</p>
               </div>
+              <Link to="/forgot">
               <p className="font-Poppins text-[14px] text-[#FF8682]">
                 Forgot Password
               </p>
+              </Link>
             </div>
-            <p className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <p onClick={handleLogin} className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
               Login
             </p>
             <p className="text-[14px] w-[90%] font-Poppins text-center">
               Don’t have an account?
-              <span className="text-[#FF8C42]"> Sign up</span>
+              <Link to="/signup"><span className="text-[#FF8C42]"> Sign up</span></Link>
+              
             </p>
             <hr className="w-[90%] "/>
             <p className="font-Poppins text-[14px] text-gray-400 absolute top-[74vh] left-[24vw] bg-white px-1">Or login with</p>

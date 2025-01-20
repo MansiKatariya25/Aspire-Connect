@@ -8,16 +8,20 @@ import Newpass from "./Components/Authentication/Newpass";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Jobs from "./Components/Dashboard/Jobs";
 import { createContext, useState } from "react";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 export const DataContext = createContext();
 
 function App() {
 
   const [dashboard,setDashboard] = useState(0)
+  axios.defaults.baseURL="http://localhost:8000/api"
  
   return (
     <DataContext.Provider value={{dashboard,setDashboard}}>
       <BrowserRouter>
+      <ToastContainer autoClose={2000} theme="dark"/>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login/>}/>
