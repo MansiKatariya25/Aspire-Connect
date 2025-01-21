@@ -117,4 +117,12 @@ public class UserController {
 
     }
 
+    @GetMapping("/auth/verify-user")
+    public ResponseEntity<?> verifyuser(@RequestHeader("Authorization") String authorizationHeader) {
+        // Extract token and verify it
+
+        return ResponseEntity.ok("Verified");
+
+    }
+
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../Config/axios";
 
 function Newpass() {
   const [Pass,SetPass] = useState("")
@@ -10,7 +11,7 @@ function Newpass() {
   const handleupdate = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.put('/users/auth/update-pass')
+      const response = await api.put('/users/auth/update-pass')
       if(response){
         toast.success("Password updated Successfully")
         useNav('/login')

@@ -1,21 +1,27 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { DataContext } from "../../App";
+import api from "../Config/axios";
 
 function Login() {
-    const [email,SetEmail] = useState("")
-    const [password,SetPass]= useState("")
+    const {setToken} = useContext(DataContext)
+    const [email,SetEmail] = useState("singhrajtilak65@gmail.com")
+    const [password,SetPass]= useState("mansi")
     
     const useNav = useNavigate()
     const handleLogin = async()=>{
       try {
-        const response = await axios.post("/users/auth/login",{
+        const response = await api.post("/users/auth/login",{
           email:email,
           password:password
         })
         if(response){
+          console.log(response)
+          localStorage.setItem('token',response.data.token)
+          setToken(response.data.token)
           toast.success("Login Succesfully")
           useNav("/dashboard")
         }

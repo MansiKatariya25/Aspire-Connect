@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import api from '../Config/axios'
 
 function Verify() {
 
@@ -11,7 +12,7 @@ function Verify() {
   const handleverify = async(e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('/users/auth/verify-otp')
+      const response = await api.post('/users/auth/verify-otp')
       if(response){
        toast.success("Otp verified Successfully")
        useNav('/newpass')

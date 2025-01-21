@@ -7,31 +7,30 @@ import Verify from "./Components/Authentication/Verify";
 import Newpass from "./Components/Authentication/Newpass";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Jobs from "./Components/Dashboard/Jobs";
-import { createContext, useState } from "react";
-import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
+import Protected from "./Components/Protected";
 
 export const DataContext = createContext();
 
 function App() {
+  const [dashboard, setDashboard] = useState(0);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  const [dashboard,setDashboard] = useState(0)
-  axios.defaults.baseURL="http://localhost:8000/api"
- 
   return (
-    <DataContext.Provider value={{dashboard,setDashboard}}>
+    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken }}>
       <BrowserRouter>
-      <ToastContainer autoClose={2000} theme="dark"/>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/forgot" element={<Forgot/>}/>
-        <Route path="/verify" element={<Verify/>}/>
-        <Route path="/newpass" element={<Newpass/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/dashboard/jobs" element={<Jobs/>}/>
-      </Routes>
+        <ToastContainer autoClose={2000} theme="dark" />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/newpass" element={<Newpass />} />
+          <Route path="/dashboard" element={<Protected component={Dashboard} />} />
+          <Route path="/jobs" element={<Protected component={Jobs} />} /> {/* Protected this route too */}
+        </Routes>
       </BrowserRouter>
     </DataContext.Provider>
   );

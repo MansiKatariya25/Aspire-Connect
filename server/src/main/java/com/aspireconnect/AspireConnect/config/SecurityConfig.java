@@ -24,21 +24,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/users/auth/login", "/api/users/auth/register",
-                                "/api/users/auth/forgot-password","/api/users/auth/verify-otp")
-                        .permitAll() // Allow public routes
-                        .anyRequest().authenticated())
-                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // No
-                                                                                                                     // session
-
-        // Add the JWT filter before the username/password authentication filter
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+            .cors() // This will use the corsConfigurationSource bean from CorsConfig
+            .and()
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(requests -> requests
+                .requestMatchers("/api/users/auth/login","/", "/api/users/auth/register",
+                        "/api/users/auth/forgot-password","/api/users/auth/verify-otp")
+                .permitAll()
+                .anyRequest().authenticated())
+            .sessionManagement(management -> 
+                management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+
+
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
