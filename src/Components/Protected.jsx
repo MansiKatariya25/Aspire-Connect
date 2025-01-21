@@ -1,41 +1,46 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "./Config/axios";
+
 
 function Protected({ component: Component }) {
   const [verified, setVerify] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (!token) {
-      navigate("/login"); // Redirect to login if no token is found
+      navigate("/login");
       return;
     }
 
     const verifyUser = async () => {
       try {
-        const response = await axios.get("/users/auth/verify-user", {
-          headers: {
-           'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-
-          },
-        });
-        if (response) {
+        const response = await api.get("/users/auth/verify-user");
+        if (response.status === 200) {
           setVerify(true);
         }
       } catch (error) {
-        console.log(error);
-        // navigate("/login");
+        console.error('Authentication error:', error);
+        if (error.response?.status === 403 || error.response?.status === 401) {
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
+      } finally {
+        setLoading(false);
       }
     };
 
     verifyUser();
   }, [navigate, token]);
 
-  if (!verified) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (!verified) {
+    return navigate("/login");
   }
 
   return <Component />;

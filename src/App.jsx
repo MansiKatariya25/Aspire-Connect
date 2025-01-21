@@ -8,7 +8,6 @@ import Newpass from "./Components/Authentication/Newpass";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Jobs from "./Components/Dashboard/Jobs";
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import Protected from "./Components/Protected";
 
@@ -16,19 +15,10 @@ export const DataContext = createContext();
 
 function App() {
   const [dashboard, setDashboard] = useState(0);
-  const [token,setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  axios.defaults.baseURL = "http://localhost:8000/api"
-  // useEffect(() => {
-  //   if (token) {
-  //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  //   } else {
-  //     delete axios.defaults.headers.common["Authorization"];
-  //   }
-  // }, [token]);
-  
   return (
-    <DataContext.Provider value={{ dashboard, setDashboard,token,setToken }}>
+    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken }}>
       <BrowserRouter>
         <ToastContainer autoClose={2000} theme="dark" />
         <Routes>
@@ -38,9 +28,8 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/newpass" element={<Newpass />} />
-          
-          <Route path="/dashboard" element={<Protected component={Dashboard}/>} /> 
-          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/dashboard" element={<Protected component={Dashboard} />} />
+          <Route path="/jobs" element={<Protected component={Jobs} />} /> {/* Protected this route too */}
         </Routes>
       </BrowserRouter>
     </DataContext.Provider>
