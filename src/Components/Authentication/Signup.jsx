@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,6 +9,7 @@ function Signup() {
   const [Lname, SetLname] = useState("");
   const [Pass, SetPass] = useState("");
   const [Email, SetEmail] = useState("");
+  const useNav = useNavigate();
 
   const [selectedRole, setSelectedRole] = useState(null);
   const cities = [
@@ -21,7 +21,7 @@ function Signup() {
 
   const handlesignup = async (e) => {
     e.preventDefault();
-    const useNav = useNavigate();
+    
 
     try {
       const response = await api.post("/users/auth/register", {

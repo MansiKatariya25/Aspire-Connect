@@ -14,6 +14,7 @@ function Forgot() {
       const response = await api.post('/users/auth/forgot-password',{email:Email})
       if(response){
         toast.success("OTP successfully sent to your registered email id")
+        localStorage.setItem('email',Email)
         useNav('/verify')
       }
 

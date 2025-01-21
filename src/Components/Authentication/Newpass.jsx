@@ -11,7 +11,7 @@ function Newpass() {
   const handleupdate = async (e) => {
     e.preventDefault()
     try {
-      const response = await api.put('/users/auth/update-pass')
+      const response = await api.put('/users/auth/update-pass',{password:Pass})
       if(response){
         toast.success("Password updated Successfully")
         useNav('/login')

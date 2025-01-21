@@ -4,8 +4,10 @@ import Sidebar from './Sidebar'
 import Content from './Content'
 import { DataContext } from '../../App'
 import Jobs from './Jobs'
+import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
+  const navigate = useNavigate()
 
   const {dashboard,setDashboard} = useContext(DataContext)
   return (

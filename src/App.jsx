@@ -15,8 +15,8 @@ export const DataContext = createContext();
 
 function App() {
   const [dashboard, setDashboard] = useState(0);
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
+  const [token, setToken] = useState(localStorage.getItem("token"));
+ 
   return (
     <DataContext.Provider value={{ dashboard, setDashboard, token, setToken }}>
       <BrowserRouter>
@@ -27,9 +27,16 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/verify" element={<Verify />} />
-          <Route path="/newpass" element={<Newpass />} />
-          <Route path="/dashboard" element={<Protected component={Dashboard} />} />
-          <Route path="/jobs" element={<Protected component={Jobs} />} /> {/* Protected this route too */}
+          <Route path="/newpass" element={<Protected component={Newpass} />} />
+          <Route
+            path="/dashboard"
+            element={<Protected component={Dashboard} />}
+          />
+          <Route
+            path="/dashboard/jobs"
+            element={<Protected component={Jobs} />}
+          />
+          {/* Protected this route too */}
         </Routes>
       </BrowserRouter>
     </DataContext.Provider>

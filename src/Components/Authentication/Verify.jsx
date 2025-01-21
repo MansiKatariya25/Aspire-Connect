@@ -6,13 +6,16 @@ import api from '../Config/axios'
 
 function Verify() {
 
-  const [Code,SetCode] = useState("")
+  const [Code,SetCode] = useState(0)
   const useNav = useNavigate()
 
   const handleverify = async(e) => {
     e.preventDefault()
     try {
-      const response = await api.post('/users/auth/verify-otp')
+      const response = await api.post('/users/auth/verify-otp',{
+        email:localStorage.getItem('email'),
+       otp:Code
+      })
       if(response){
        toast.success("Otp verified Successfully")
        useNav('/newpass')
@@ -57,6 +60,8 @@ function Verify() {
                 id="verify"
                 placeholder="Enter OTP"
                 className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                value={Code}
+                onChange={(e)=>(SetCode(e.target.value))}
               />
             </div>
             <p className="text-[14px] font-Poppins">Didn’t receive a code?  <span className="text-[#FF8682]">Resend</span></p>
