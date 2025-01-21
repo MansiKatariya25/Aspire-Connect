@@ -60,7 +60,7 @@ function Verify() {
             </div>
             <p className="text-[14px] font-Poppins">Didn’t receive a code?  <span className="text-[#FF8682]">Resend</span></p>
 
-            <button className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <button className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md cursor-pointer">
               Verify
             </button>
           </div>

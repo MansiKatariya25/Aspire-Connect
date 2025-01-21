@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Dropdown } from "primereact/dropdown";
 
 function Signup() {
   const [Fname, SetFname] = useState("");
@@ -8,8 +10,17 @@ function Signup() {
   const [Pass, SetPass] = useState("");
   const [Email, SetEmail] = useState("");
 
+  const [selectedRole, setSelectedRole] = useState(null);
+  const cities = [
+    { name: "Student" },
+    { name: "Mentor" },
+    { name: "Alumni" },
+    { name: "Comapny" },
+  ];
+
   const handlesignup = async (e) => {
     e.preventDefault();
+    const useNav = useNavigate();
 
     try {
       const response = await axios.post("/users/auth/register", {
@@ -19,10 +30,11 @@ function Signup() {
         email: Email,
       });
       if (response) {
-        alert("User registered succesfully");
+        toast.success("User registered succesfully");
+        useNav("/dashboard");
       }
     } catch (error) {
-      alert(error);
+      toast.error(error);
     }
   };
 
@@ -95,6 +107,17 @@ function Signup() {
                     className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                   />
                 </div>
+                <div className="w-[50%] border px-4 border-gray-500 rounded-md flex justify-center items-center">
+                  <Dropdown
+                    value={selectedRole}
+                    onChange={(e) => setSelectedRole(e.value)}
+                    options={cities}
+                    optionLabel="name"
+                    placeholder="Select a Role"
+                    className="w-full md:w-14rem"
+                    highlightOnSelect={false}
+                  />
+                </div>
               </div>
               <div className="relative border w-full border-gray-500 rounded-md">
                 <label
@@ -108,6 +131,7 @@ function Signup() {
                   id="password"
                   value={Pass}
                   onChange={(e) => SetPass(e.target.value)}
+                  placeholder="Enter password"
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
@@ -121,6 +145,7 @@ function Signup() {
                 <input
                   type="password"
                   id="cpassword"
+                  placeholder="Confirm password"
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
                 />
               </div>
@@ -134,15 +159,16 @@ function Signup() {
               </div>
               <button
                 type="submit"
-                className="font-Poppins w-full text-center bg-[#FF8C42] text-white p-2 rounded-md"
+                className="font-Poppins w-full text-center bg-[#FF8C42] cursor-pointer text-white p-2 rounded-md"
               >
                 Create account
               </button>
 
               <p className="text[14px] font-Poppins text-center">
                 Already have an account?
-                <Link to="/login"><span className="text-[#FF8682]">Login</span>{" "}</Link>
-                
+                <Link to="/login">
+                  <span className="text-[#FF8682]">Login</span>{" "}
+                </Link>
               </p>
               <hr className="w-full " />
               <p className="font-Poppins text-[14px] text-gray-400 absolute top-[88vh] right-[28vw] bg-white px-1">

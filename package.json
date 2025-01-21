@@ -12,6 +12,8 @@
   "dependencies": {
     "aspireconnect": "file:",
     "axios": "^1.7.9",
+    "dropdown": "^0.2.0",
+    "primereact": "^10.9.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",

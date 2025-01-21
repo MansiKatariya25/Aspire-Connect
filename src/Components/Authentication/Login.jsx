@@ -87,7 +87,7 @@ function Login() {
               </p>
               </Link>
             </div>
-            <p onClick={handleLogin} className="font-Poppins w-[90%] text-center bg-[#FF8C42] text-white p-2 rounded-md">
+            <p onClick={handleLogin} className="font-Poppins w-[90%] text-center cursor-pointer bg-[#FF8C42] text-white p-2 rounded-md">
               Login
             </p>
             <p className="text-[14px] w-[90%] font-Poppins text-center">
