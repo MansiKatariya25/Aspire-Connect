@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Forgot() {
   const [Email,SetEmail] = useState("")
@@ -11,12 +12,12 @@ function Forgot() {
     try {
       const response = await axios.post('/users/auth/forgot-password',{email:Email})
       if(response){
-        alert("OTP successfully sent to your registered email id")
+        toast.success("OTP successfully sent to your registered email id")
         useNav('/verify')
       }
 
     } catch (error) {
-      alert(error)
+      toast.error(error)
     }
   }
 

@@ -15,7 +15,8 @@ public class WebConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:5173") // Replace with your frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*") // Allow authorization header and other headers
+                        .allowCredentials(true);
             }
         };
     }

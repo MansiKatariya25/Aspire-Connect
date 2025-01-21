@@ -66,8 +66,6 @@ public class User {
         this.password = password;
     }
 
-
-    
     public String getRole() {
         return role;
     }
@@ -75,7 +73,7 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-    
+
     // toString method (optional, for debugging/logging purposes)
     @Override
     public String toString() {

@@ -1,20 +1,24 @@
 package com.aspireconnect.AspireConnect.controllers;
 
-import java.util.Optional;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Update;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.aspireconnect.AspireConnect.model.Otp;
 import com.aspireconnect.AspireConnect.model.User;
-import com.aspireconnect.AspireConnect.repository.UserRepo;
+
 import com.aspireconnect.AspireConnect.service.OtpService;
 import com.aspireconnect.AspireConnect.service.UserService;
+import com.aspireconnect.AspireConnect.util.JwtUtil;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,7 +30,9 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private OtpService otpservice;
-    private UserRepo userRepository;
+    @Autowired
+    private JwtUtil jwtutil;
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     // Endpoint to register a new user
 
@@ -35,7 +41,7 @@ public class UserController {
         try {
             String pass = passwordEncoder.encode(user.getPassword());
             user.setPassword(pass);
-            User  existingUser = userService.getUserByEmail(user.getEmail());
+            User existingUser = userService.getUserByEmail(user.getEmail());
             if (existingUser != null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Already Exists");
             }
@@ -53,8 +59,9 @@ public class UserController {
         try {
             String email = entity.getEmail();
             User result = userService.loginUser(email);
+            String token = jwtutil.generateToken(email);
             if (passwordEncoder.matches(entity.getPassword(), result.getPassword())) {
-                return ResponseEntity.ok(result); // HTTP 200 OK
+                return ResponseEntity.ok().body(Map.of("msg", "login success", "token", token)); // HTTP 200 OK
 
             }
 
@@ -84,11 +91,11 @@ public class UserController {
     }
 
     @PostMapping("/auth/verify-otp")
-    public ResponseEntity<String> verifyOtp(@RequestBody Otp entity) {
+    public ResponseEntity<?> verifyOtp(@RequestBody Otp entity) {
         boolean isVerified = otpservice.verifyOtp(entity.getEmail(), entity.getOtp());
-
+        String token = jwtutil.generateToken(entity.getEmail());
         if (isVerified) {
-            return ResponseEntity.ok("OTP verified successfully.");
+            return ResponseEntity.ok().body(Map.of("msg", "OTP verified successfully.", "token", token));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired OTP.");
         }
@@ -97,8 +104,8 @@ public class UserController {
     @PutMapping("/auth/update-pass")
     public ResponseEntity<?> newpass(@RequestBody User entity) {
         try {
-
-            String email = entity.getEmail();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String email = authentication.getName();
             String pass = entity.getPassword();
             String encoded = passwordEncoder.encode(pass);
             User result = userService.updatePass(encoded, email);
@@ -107,6 +114,14 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
         }
+
+    }
+
+    @GetMapping("/auth/verify-user")
+    public ResponseEntity<?> verifyuser(@RequestHeader("Authorization") String authorizationHeader) {
+        // Extract token and verify it
+
+        return ResponseEntity.ok("Verified");
 
     }
 
