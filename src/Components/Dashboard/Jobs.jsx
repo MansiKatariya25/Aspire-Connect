@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { DataContext } from "../../App";
 
 function Jobs() {
+  const {dashboard,setDashboard} = useContext(DataContext)
+
   const [jobs, setJobs] = useState([
     {
       name: "Techical Support Specialist",
@@ -74,7 +77,7 @@ function Jobs() {
             </p>
           </div>
         </div>
-        <div className="py-2 cards-outer flex flex-wrap gap-4">
+        <div className="py-2 cards-outer flex flex-wrap gap-4" >
           {jobs.map((items, index) => {
             return (
               <div

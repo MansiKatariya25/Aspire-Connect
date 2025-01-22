@@ -9,14 +9,14 @@ function Sidebar() {
   return (
     <div className="fixed w-[16vw] h-[92vh] top-14 flex flex-col  p-6 shadow-md  bg-white">
       <div className="flex flex-col gap-4 justify-between">
-        <div className="border border-gray-300 rounded-sm p-2 w-[90%] flex justify-start items-center gap-4 ">
+        {/* <div className="border border-gray-300 rounded-sm p-2 w-[90%] flex justify-start items-center gap-4 ">
           <img src="search.svg" className="text-gray-500" />
           <input
             type="text"
             placeholder="Search"
             className="w-[90%] outline-none"
           />
-        </div>
+        </div> */}
 
         <div className="h-[80vh] flex flex-col gap-4">
           <div>

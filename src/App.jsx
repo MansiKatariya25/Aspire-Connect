@@ -10,16 +10,18 @@ import Jobs from "./Components/Dashboard/Jobs";
 import { createContext, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Protected from "./Components/Protected";
+import JobDetails from "./Components/Dashboard/JobDetails";
 
 export const DataContext = createContext();
 
 function App() {
   const [dashboard, setDashboard] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [question,setQue] = useState([])
 
  
   return (
-    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken}}>
+    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken,question,setQue}}>
       <BrowserRouter>
         <ToastContainer autoClose={2000} theme="dark" />
         <Routes>
@@ -28,6 +30,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/dashboard/details" element={<JobDetails/>}/>
           <Route path="/newpass" element={<Protected component={Newpass} />} />
           <Route
             path="/dashboard"
