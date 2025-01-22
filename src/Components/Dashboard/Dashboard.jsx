@@ -11,9 +11,9 @@ function Dashboard() {
 
   const {dashboard,setDashboard} = useContext(DataContext)
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full '>
       <Navbar/>
-      <div className='flex'>
+      <div className='flex justify-between'>
       <Sidebar/>
       {dashboard == 0 && <Content/>}
       {dashboard == 1 && <Jobs/>}

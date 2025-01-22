@@ -2,7 +2,7 @@ import React from 'react'
 
 function Navbar() {
   return (
-    <div className=' flex justify-between items-center w-full h-[8vh] '>
+    <div className='fixed bg-white z-40 flex justify-between items-center w-full h-[10vh] '>
       <div >
         <p className='font-Inknut text-xl p-6 '>Aspire Connect</p>
       </div>

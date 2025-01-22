@@ -42,7 +42,7 @@ function Jobs() {
   ]);
 
   return (
-    <div className="p-4 w-[80vw] h-full">
+    <div className="absolute top-12 w-[85vw] h-[92vh] p-6 right-0 bg-white">
       <div className="p-2 flex flex-col gap-2">
         <p className="font-Roboto text-[20px] font-medium">
           Jobs And Internship

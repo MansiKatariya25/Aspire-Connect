@@ -36,7 +36,7 @@ function Content() {
       },
   ]);
   return (
-    <div className="w-[80vw] h-[92vh] p-6">
+    <div className="absolute w-[85vw] h-[92vh] p-6 right-0 bg-white">
       <div>
         <p className="font-Roboto text-[20px] font-medium ">
           Find a Perfect Mentor for Yourself

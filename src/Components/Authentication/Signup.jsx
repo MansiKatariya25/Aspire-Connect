@@ -12,7 +12,7 @@ function Signup() {
   const useNav = useNavigate();
 
   const [selectedRole, setSelectedRole] = useState(null);
-  const cities = [
+  const roles = [
     { name: "Student" },
     { name: "Mentor" },
     { name: "Alumni" },
@@ -29,6 +29,7 @@ function Signup() {
         lname: Lname,
         password: Pass,
         email: Email,
+        role:selectedRole,
       });
       if (response) {
         toast.success("User registered succesfully");
@@ -112,7 +113,7 @@ function Signup() {
                   <Dropdown
                     value={selectedRole}
                     onChange={(e) => setSelectedRole(e.value)}
-                    options={cities}
+                    options={roles}
                     optionLabel="name"
                     placeholder="Select a Role"
                     className="w-full md:w-14rem"

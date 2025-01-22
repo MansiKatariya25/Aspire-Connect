@@ -16,9 +16,10 @@ export const DataContext = createContext();
 function App() {
   const [dashboard, setDashboard] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
+
  
   return (
-    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken }}>
+    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken}}>
       <BrowserRouter>
         <ToastContainer autoClose={2000} theme="dark" />
         <Routes>
