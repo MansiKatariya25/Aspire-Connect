@@ -1,6 +1,23 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function Content() {
+ 
+  // useEffect(()=>{
+  //   const getMentors = async() => {
+  //     try {
+  //       const response = await axios.get('/api/mentors/get-mentors')
+  //       console.log(response.data)
+  //       console.log("helo")
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //     getMentors();
+  //   }
+  // },[]);
+
+
+
   const [mentorData, setData] = useState([
     {
       image: "/man.png",

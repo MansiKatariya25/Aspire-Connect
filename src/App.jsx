@@ -12,12 +12,29 @@ import { ToastContainer } from "react-toastify";
 import Protected from "./Components/Protected";
 import JobDetails from "./Components/Dashboard/JobDetails";
 
+import api from "./Components/Config/axios";
+
 export const DataContext = createContext();
 
 function App() {
   const [dashboard, setDashboard] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [question,setQue] = useState([])
+
+   useEffect(()=>{
+      const getMentors = async() => {
+        try {
+          const response = await api.get('/api/mentors/get-mentors')
+          console.log(response.data)
+          console.log("helo")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      
+      getMentors();
+    },[]);
+    
 
  
   return (

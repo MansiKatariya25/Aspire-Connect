@@ -31,8 +31,8 @@ function Sidebar() {
               dashboard == 0 ? "bg-slate-100" : ""
             }  hover:bg-slate-100 transition-all duration-75 w-[90%] p-2 rounded-sm cursor-pointer`}
           >
-            <img src="home.svg" />
-            <p className="font-Roboto text-[14px] text-[#FF4500] font-medium">
+            <img src="home.svg"  />
+            <p className="font-Roboto text-[14px] font-medium">
               Mentors
             </p>
           </div>
