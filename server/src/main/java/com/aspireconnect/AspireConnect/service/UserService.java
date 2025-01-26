@@ -1,6 +1,5 @@
 package com.aspireconnect.AspireConnect.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,6 @@ public class UserService {
 
     }
 
-
     public User updatePass(String pass, String email) {
         try {
             User user = getUserByEmail(email);
@@ -40,6 +38,4 @@ public class UserService {
 
     }
 
-
 }
-

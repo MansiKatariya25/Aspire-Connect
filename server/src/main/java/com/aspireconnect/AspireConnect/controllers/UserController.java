@@ -19,6 +19,8 @@ import com.aspireconnect.AspireConnect.model.User;
 import com.aspireconnect.AspireConnect.service.OtpService;
 import com.aspireconnect.AspireConnect.service.UserService;
 import com.aspireconnect.AspireConnect.util.JwtUtil;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/users")
@@ -123,6 +125,13 @@ public class UserController {
 
         return ResponseEntity.ok("Verified");
 
+    }
+
+    @GetMapping("/get-user-data")
+    public ResponseEntity<?> getUserData(@RequestHeader("Authorization") String authorizationHeader) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
 }

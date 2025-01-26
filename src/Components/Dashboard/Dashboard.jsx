@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Navbar from '../Common/Navbar'
 import Sidebar from './Sidebar'
-import Content from './Content'
+import Content from './Mentors'
 import { DataContext } from '../../App'
 import Jobs from './Jobs'
 import { useNavigate } from 'react-router-dom'

@@ -1,57 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import api from "../Config/axios";
 
-function Content() {
- 
-  // useEffect(()=>{
-  //   const getMentors = async() => {
-  //     try {
-  //       const response = await axios.get('/api/mentors/get-mentors')
-  //       console.log(response.data)
-  //       console.log("helo")
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //     getMentors();
-  //   }
-  // },[]);
+function Mentors() {
+  const [mentorData, setData] = useState([]);
+  useEffect(() => {
+    const getMentors = async () => {
+      try {
+        const response = await api.get("/mentors/get-mentors");
+        console.log(response.data);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
+    getMentors();
+  }, []);
 
-
-  const [mentorData, setData] = useState([
-    {
-      image: "/man.png",
-      name: "Abdulahi Omotayo Amuda ",
-      position: "Senior Designer at AEL Solutions",
-      message: "28 sessions (13 reviews)",
-      experience: "7 years",
-      attendance: "100%",
-    },
-    {
-      image: "/women.png",
-      name: "Federica Lamera ",
-      position: "Service Design Lead at MING Labs",
-      message: "142 sessions (26 reviews)",
-      experience: "10 years",
-      attendance: "100%",
-    },
-    {
-        image: "/man.png",
-        name: "Abdulahi Omotayo Amuda ",
-        position: "Senior Designer at AEL Solutions",
-        message: "28 sessions (13 reviews)",
-        experience: "7 years",
-        attendance: "100%",
-      },
-      {
-        image: "/women.png",
-        name: "Federica Lamera ",
-        position: "Service Design Lead at MING Labs",
-        message: "142 sessions (26 reviews)",
-        experience: "10 years",
-        attendance: "100%",
-      },
-  ]);
   return (
     <div className="absolute w-[85vw] h-[92vh] p-6 right-0 bg-white">
       <div>
@@ -81,13 +47,13 @@ function Content() {
             return (
               <div
                 key={key}
-                className="w-[300px] h-[450px] border rounded-md p-2 "
+                className="w-[300px] h-[450px] border rounded-lg p-2 flex flex-col justify-evenly items-center "
               >
-                <img src={items.image} />
+                <img src={items?.profile_pic || ""} className="rounded-full w-[300px] h-[300px]" />
                 <div className="p-2 flex flex-col justify-between h-[180px]">
                   <div className="flex flex-col gap-1">
                     <p className="font-Manrope text-[16px] font-medium">
-                      {items.name}
+                      {items?.fname + " " + items?.lname || "Unknown"}
                     </p>
                     <div className="flex items-center gap-2">
                       <img src="position.svg" />
@@ -98,7 +64,7 @@ function Content() {
                     <div className="flex items-center gap-2">
                       <img src="message.svg" />
                       <p className="font-Manrope text-[14px] text-gray-500">
-                        {items.message}
+                        {items.skills}
                       </p>
                     </div>
                   </div>
@@ -108,15 +74,15 @@ function Content() {
                         Experience
                       </p>
                       <p className="font-Manrope text-[14px]">
-                        {items.experience}
+                        {items.exp}
                       </p>
                     </div>
                     <div>
                       <p className="font-Manrope text-[12px] text-gray-500">
-                        Avg. Attendance
+                        Sessions
                       </p>
                       <p className="font-Manrope text-[14px]">
-                        {items.attendance}
+                        {items.sessions}
                       </p>
                     </div>
                   </div>
@@ -130,4 +96,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Mentors;
