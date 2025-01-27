@@ -29,7 +29,7 @@ function Signup() {
         lname: Lname,
         password: Pass,
         email: Email,
-        role: selectedRole,
+        role: selectedRole.name,
       });
       if (response) {
         toast.success("User registered succesfully");

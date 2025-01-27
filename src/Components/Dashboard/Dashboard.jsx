@@ -11,7 +11,6 @@ import Response from './Response'
 import Chat from '../Common/Chat'
 
 function Dashboard() {
-  const navigate = useNavigate()
 
   const {dashboard,setDashboard} = useContext(DataContext)
   return (

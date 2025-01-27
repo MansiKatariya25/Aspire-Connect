@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import api from "../Config/axios";
+import { DataContext } from "../../App";
 
 function Mentors() {
   const [mentorData, setMentorData] = useState([]); // Holds fetched mentor data
   const [searchTerm, setSearchTerm] = useState(""); // Search term input
   const [filteredMentors, setFilteredMentors] = useState([]); // Filtered mentors
+  const { setDashboard, setChats } = useContext(DataContext);
 
   // Fetch mentor data from API
   useEffect(() => {
     const getMentors = async () => {
       try {
         const response = await api.get("/mentors/get-mentors");
-        console.log(response.data);
         setMentorData(response.data); // Store the data in state
         setFilteredMentors(response.data); // Initialize filtered mentors
       } catch (error) {
@@ -25,19 +26,31 @@ function Mentors() {
   // Filter mentors whenever `searchTerm` or `mentorData` changes
   useEffect(() => {
     const filtered = mentorData.filter((mentor) => {
-      const fname = mentor.fname ? mentor.fname.toLowerCase()+mentor.lname.toLowerCase() : "";
+      const fname = mentor.fname
+        ? mentor.fname.toLowerCase() + mentor.lname.toLowerCase()
+        : "";
       const compName = mentor.compName ? mentor.compName.toLowerCase() : "";
-     
+
       return (
-        fname.includes(searchTerm.replace(/\s+/g, '').toLowerCase()) ||
+        fname.includes(searchTerm.replace(/\s+/g, "").toLowerCase()) ||
         compName.includes(searchTerm.toLowerCase())
       );
     });
-  
+
     setFilteredMentors(filtered);
   }, [searchTerm, mentorData]);
-  
 
+  const handleChats = (email) => {
+    
+    const filtered = mentorData.filter((mentor) => {
+      const emails = mentor.email ? mentor.email.toLowerCase() : "";
+
+      return emails.includes(email.toLowerCase());
+    });
+
+    setChats(filtered);
+    setDashboard(6);
+  };
   return (
     <div className="absolute w-[85vw] h-[92vh] p-6 right-0 bg-white">
       <div>
@@ -70,7 +83,7 @@ function Mentors() {
           {filteredMentors.length > 0 ? (
             filteredMentors.map((mentor) => (
               <div
-                key={mentor.id || mentor.fname} // Use a unique key
+                key={mentor.id || mentor.fname.toUpperCase()} // Use a unique key
                 className="w-[300px] h-[450px] border rounded-lg p-2 flex flex-col justify-evenly items-center"
               >
                 {/* Mentor Profile Picture */}
@@ -84,7 +97,7 @@ function Mentors() {
                 <div className="p-2 flex flex-col justify-between h-[180px] w-full">
                   <div className="flex flex-col gap-1">
                     <p className="font-Manrope text-[16px] font-medium">
-                      {mentor?.fname + " " + mentor?.lname || "Unknown"}
+                      {mentor?.fname.toUpperCase() + " " + mentor?.lname.toUpperCase() || "Unknown"}
                     </p>
                     <div className="flex items-center gap-2">
                       <img src="position.svg" alt="Position" />
@@ -115,11 +128,14 @@ function Mentors() {
                       <p className="font-Manrope text-[14px]">
                         {mentor.sessions || 0}
                       </p>
-                      <img src="./chat.png" className="hover:scale-105 transition-all duration-100 border-orange-600 hover:border rounded-full absolute translate-x-8 w-[60px]" alt="Chat" />
+                      <img
+                        src="./chat.png"
+                        onClick={() => handleChats(mentor.email)}
+                        className="hover:scale-105 transition-all duration-100 border-orange-600 hover:border rounded-full absolute translate-x-8 w-[60px]"
+                        alt="Chat"
+                      />
                     </div>
-                   
                   </div>
-                 
                 </div>
               </div>
             ))

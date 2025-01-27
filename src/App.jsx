@@ -19,12 +19,14 @@ export const DataContext = createContext();
 function App() {
   const [dashboard, setDashboard] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [question,setQue] = useState([])
+  const [question, setQue] = useState([]);
+  const [chats, setChats] = useState([]);
+  const [userData,setUserData] = useState([])
 
-
- 
   return (
-    <DataContext.Provider value={{ dashboard, setDashboard, token, setToken,question,setQue}}>
+    <DataContext.Provider
+      value={{ dashboard, setDashboard, token, setToken, question, setQue,chats,setChats,userData,setUserData }}
+    >
       <BrowserRouter>
         <ToastContainer autoClose={2000} theme="dark" />
         <Routes>
@@ -33,7 +35,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/verify" element={<Verify />} />
-          <Route path="/dashboard/details" element={<JobDetails/>}/>
+          <Route path="/dashboard/details" element={<JobDetails />} />
           <Route path="/newpass" element={<Protected component={Newpass} />} />
           <Route
             path="/dashboard"

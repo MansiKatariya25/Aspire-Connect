@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { DataContext } from "../../App";
 
 function Chat() {
   const [messages, setMessages] = useState([]); // Array to store chat messages
   const [newMessage, setNewMessage] = useState(""); // Input field value
-
-  const person = {
-    name: "John Doe",
-    profilePic: "https://via.placeholder.com/150", // Replace with actual image URL
-  };
-
+  const { chats, setChats } = useContext(DataContext);
   // Handle sending a new message
   const handleSendMessage = () => {
     if (newMessage.trim()) {
@@ -21,15 +17,17 @@ function Chat() {
   };
 
   return (
-    <div className="absolute  right-16 top-36 chat-box w-[75vw] h-[600px] bg-white border border-gray-300 rounded-lg shadow-md flex flex-col">
+    <div className="absolute  right-16 top-36 chat-box w-[75vw] h-[600px] bg-white border-2 border-orange-100 rounded-3xl shadow-md flex flex-col">
       {/* Header */}
       <div className="chat-header flex items-center gap-4 p-4 border-b border-gray-200">
         <img
-          src={person.profilePic}
-          alt={`${person.name}'s profile`}
+          src={chats[0].profile_pic}
+          alt={`${chats[0].fname + " " + chats[0].lname}'s profile`}
           className="w-10 h-10 rounded-full"
         />
-        <p className="font-Manrope text-[16px] font-medium">{person.name}</p>
+        <p className="font-Manrope text-[16px] font-medium">
+          {chats[0].fname + " " + chats[0].lname}
+        </p>
       </div>
 
       {/* Message Body */}
@@ -60,13 +58,13 @@ function Chat() {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type your message"
-          className="flex-1 border border-gray-300 rounded-md p-2 outline-none"
+          className="flex-1 border border-orange-400 rounded-full p-2 outline-none"
         />
         <button
           onClick={handleSendMessage}
-          className="bg-orange-400 rounded-full text-white px-4 py-2 w-[80px] flex justify-center items-center hover:bg-orange-600 transition"
+          className="bg-orange-400 rounded-full text-white p-4 py-2 w-[100px] h-[45px] flex justify-center items-center hover:bg-orange-600 transition"
         >
-          <img src="./send.png"  className="w-[20px] h-[20px]" alt="Send" />
+          <img src="./send.png" className="w-[30px] h-[30px]" alt="Send" />
         </button>
       </div>
     </div>
