@@ -10,6 +10,7 @@ function Signup() {
   const [Pass, SetPass] = useState("");
   const [Email, SetEmail] = useState("");
   const useNav = useNavigate();
+  const [visible, setVisible] = useState(false);
 
   const [selectedRole, setSelectedRole] = useState(null);
   const roles = [
@@ -21,7 +22,6 @@ function Signup() {
 
   const handlesignup = async (e) => {
     e.preventDefault();
-    
 
     try {
       const response = await api.post("/users/auth/register", {
@@ -29,7 +29,7 @@ function Signup() {
         lname: Lname,
         password: Pass,
         email: Email,
-        role:selectedRole,
+        role: selectedRole,
       });
       if (response) {
         toast.success("User registered succesfully");
@@ -39,7 +39,9 @@ function Signup() {
       toast.error(error);
     }
   };
-
+  const handleShowPassword = () => {
+    setVisible(!visible);
+  };
   return (
     <div className="w-full h-full">
       <p className="font-Inknut text-xl p-8 flex justify-end ">
@@ -128,15 +130,23 @@ function Signup() {
                 >
                   Password
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={Pass}
-                  onChange={(e) => SetPass(e.target.value)}
-                  placeholder="Enter password"
-                  className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
-                />
+                <div className="flex items-center justify-between">
+                  <input
+                    type={visible ? "text" : "password"}
+                    id="password"
+                    value={Pass}
+                    onChange={(e) => SetPass(e.target.value)}
+                    placeholder="Enter password"
+                    className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
+                  />
+                  <img
+                    onClick={handleShowPassword}
+                    src="./hide.png"
+                    className="w-[20px] h-[20px] mr-2"
+                  />
+                </div>
               </div>
+
               <div className="relative border w-full border-gray-500 rounded-md">
                 <label
                   htmlFor="password"
@@ -145,7 +155,7 @@ function Signup() {
                   Confirm Password
                 </label>
                 <input
-                  type="password"
+                  type={visible ? "text" : "password"}
                   id="cpassword"
                   placeholder="Confirm password"
                   className="w-full px-3 py-2 outline-none bg-transparent text-[16px] text-gray-800"
@@ -169,10 +179,10 @@ function Signup() {
               <p className="text[14px] font-Poppins text-center">
                 Already have an account?
                 <Link to="/login">
-                  <span className="text-[#FF8682]">Login</span>{" "}
+                  <span className="text-[#FF8682]"> Login</span>{" "}
                 </Link>
               </p>
-              <hr className="w-full " />
+              {/* <hr className="w-full " />
               <p className="font-Poppins text-[14px] text-gray-400 absolute top-[88vh] right-[28vw] bg-white px-1">
                 Or login with
               </p>
@@ -186,7 +196,7 @@ function Signup() {
                 <div className="border border-[#515DEF] rounded-lg p-2 px-14">
                   <img src="./apple.svg" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </form>
         </div>

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import MockTest from './MockTest'
 import JobDetails from './JobDetails'
 import Response from './Response'
+import Chat from '../Common/Chat'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -22,6 +23,7 @@ function Dashboard() {
       {dashboard == 1 && <Jobs/>}
       {dashboard == 4 && <MockTest/>}
       {dashboard == 5 && <Response/>}
+      {dashboard == 6 && <Chat/>}
       </div>
       
     </div>

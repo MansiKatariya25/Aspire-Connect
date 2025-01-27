@@ -72,6 +72,16 @@ function Sidebar() {
             <img src="mock.svg" />
             <p className="font-Roboto text-[14px] font-medium">Mock Test</p>
           </div>
+
+          <div
+          onClick={() => setDashboard(6)}
+            className={`flex items-center gap-4 ${
+              dashboard == 6 ? "bg-slate-100" : ""
+            }  hover:bg-slate-100 transition-all duration-75 w-[90%] p-2 rounded-sm cursor-pointer`}
+          >
+            <img src="./message.svg" />
+            <p className="font-Roboto text-[14px] font-medium">Chats</p>
+          </div>
         </div>
       </div>
     </div>
