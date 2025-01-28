@@ -3,9 +3,9 @@ import Navbar from "../Common/Navbar";
 
 function Hero() {
   return (
-    <div className=" h-screen">
+    <div className="h-screen">
       <Navbar />
-      <div className="h-[5%] w-full"></div>
+      <div className="h-[10%] w-full"></div>
       <div className="px-10">
         <p className="font-Manrope text-[96px] font-medium tracking-wide">
           Unlock your <span className="text-[#FF8C42]">Career</span> Potential

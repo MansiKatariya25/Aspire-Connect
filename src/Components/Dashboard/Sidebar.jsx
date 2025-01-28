@@ -2,26 +2,38 @@ import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import api from "../Config/axios";
+import Loading from "../Common/Loading";
 
 function Sidebar() {
   const { dashboard, setDashboard } = useContext(DataContext);
-  const navigate = useNavigate();
   const {userData,setUserData} = useContext(DataContext)
+  const [isLoading, setIsLoading] = useState(true);
   
 
   useEffect(() => {
-    const getMentors = async () => {
+    if(userData?.email){
+       return setIsLoading(false)
+    }
+    const getUsers = async () => {
       try {
         const response = await api.get("/users/get-user-data");
         setUserData(response.data); // Store the data in state
+        setTimeout(()=>{
+          setIsLoading(false);
+        },1500)
+        console.log(response.data)
+       
       } catch (error) {
         console.error("Failed to fetch mentors:", error);
       }
     };
 
-    getMentors();
+    getUsers();
   }, []);
    
+  if (isLoading) {
+    return <Loading/>;
+  }
 
   return (
     <div className="fixed w-[16vw] h-[92vh] top-14 flex flex-col  p-6 shadow-md  bg-white">
@@ -40,7 +52,7 @@ function Sidebar() {
             {/* Profile Picture */}
             <div className="w-24 h-24">
               <img
-                src={userData?.profile_pic||"default-avatar.png"} // Fallback to default profile picture
+                src={userData?.profile_pic||"https://avatar.iran.liara.run/public"} // Fallback to default profile picture
                 alt={`${userData?.fname}'s profile`}
                 className="w-full h-full rounded-full object-cover border border-gray-300"
               />
@@ -59,7 +71,7 @@ function Sidebar() {
             {/* Edit Button */}
             <div
               className="flex justify-end w-full items-end  text-white hover:scale-105  rounded-md transition"
-              onClick={() => navigate("/edit-profile")}
+              onClick={() => setDashboard(7)}
             >
               <img src="./pen.png" className="w-[20px] h-[20px]" alt="" srcset="" />
             </div>

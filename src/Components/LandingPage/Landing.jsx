@@ -5,7 +5,7 @@ import Hero3 from './Hero3'
 
 function Landing() {
   return (
-    <div>
+    <div >
       <Hero/>
       <Hero2/>
       <Hero3/>
