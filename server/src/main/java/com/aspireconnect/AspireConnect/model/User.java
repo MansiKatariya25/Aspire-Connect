@@ -14,6 +14,8 @@ public class User {
     private String lname;
     private String email;
     private String password;
+    private String gender;
+    private String age;
     private String role;
     private String position;
     private String exp;
@@ -25,6 +27,7 @@ public class User {
     private String stippend;
     private String jobType;
     private String jobDescription;
+    private String followers;
     private List<JobPost> jobPosts;
 
     // Default constructor
@@ -39,15 +42,18 @@ public class User {
         this.jobPosts = jobPosts;
     }
 
-  
-    public User(String id, String fname, String lname, String email, String password, String role, String position,
-            String exp, String sessions, String skills, String profile_pic, String compName, String compAddress,
-            String stippend, String jobType, String jobDescription, List<JobPost> jobPosts) {
+    
+    public User(String id, String fname, String lname, String email, String password, String gender, String age,
+            String role, String position, String exp, String sessions, String skills, String profile_pic,
+            String compName, String compAddress, String stippend, String jobType, String jobDescription,
+            List<JobPost> jobPosts) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.password = password;
+        this.gender = gender;
+        this.age = age;
         this.role = role;
         this.position = position;
         this.exp = exp;
@@ -62,8 +68,32 @@ public class User {
         this.jobPosts = jobPosts;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public String getCompName() {
         return compName;
+    }
+
+    public String getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(String followers) {
+        this.followers = followers;
     }
 
     public void setCompName(String compName) {

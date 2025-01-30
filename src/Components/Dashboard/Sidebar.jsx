@@ -6,33 +6,31 @@ import Loading from "../Common/Loading";
 
 function Sidebar() {
   const { dashboard, setDashboard } = useContext(DataContext);
-  const {userData,setUserData} = useContext(DataContext)
+  const { userData, setUserData } = useContext(DataContext);
   const [isLoading, setIsLoading] = useState(true);
-  
 
   useEffect(() => {
-    if(userData?.email){
-       return setIsLoading(false)
-    }
     const getUsers = async () => {
       try {
+        setIsLoading(true);
         const response = await api.get("/users/get-user-data");
-        setUserData(response.data); // Store the data in state
-        setTimeout(()=>{
+        setUserData(response.data); // Store the user data
+        setDashboard(0);
+        setTimeout(() => {
           setIsLoading(false);
-        },1500)
-        console.log(response.data)
-       
+        }, 1500);
+        console.log(response.data);
       } catch (error) {
-        console.error("Failed to fetch mentors:", error);
+        console.error("Failed to fetch user data:", error);
+        setIsLoading(false); // Ensure we stop loading even if there's an error
       }
     };
-
+  
     getUsers();
   }, []);
-   
+  
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
@@ -52,7 +50,10 @@ function Sidebar() {
             {/* Profile Picture */}
             <div className="w-24 h-24">
               <img
-                src={userData?.profile_pic||"https://avatar.iran.liara.run/public"} // Fallback to default profile picture
+                src={
+                  userData?.profile_pic ||
+                  "https://avatar.iran.liara.run/public"
+                } // Fallback to default profile picture
                 alt={`${userData?.fname}'s profile`}
                 className="w-full h-full rounded-full object-cover border border-gray-300"
               />
@@ -61,10 +62,12 @@ function Sidebar() {
             {/* Name and Email */}
             <div className="mt-4 text-center">
               <p className="text-2xl font-bold text-gray-800">
-                { userData?.fname.toUpperCase()+" "+userData?.lname.toUpperCase() ||"Name not available"}
+                {userData?.fname.toUpperCase() +
+                  " " +
+                  userData?.lname.toUpperCase() || "Name not available"}
               </p>
               <p className="text-md text-gray-600">
-                { userData?.email||"Email not available"}
+                {userData?.email || "Email not available"}
               </p>
             </div>
 
@@ -73,7 +76,12 @@ function Sidebar() {
               className="flex justify-end w-full items-end  text-white hover:scale-105  rounded-md transition"
               onClick={() => setDashboard(7)}
             >
-              <img src="./pen.png" className="w-[20px] h-[20px]" alt="" srcset="" />
+              <img
+                src="./pen.png"
+                className="w-[20px] h-[20px]"
+                alt=""
+                srcset=""
+              />
             </div>
           </div>
           <div
