@@ -22,6 +22,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/files")
@@ -93,4 +96,10 @@ public class FileController {
     // e.getMessage());
     // }
     // }
+
+    @GetMapping("path")
+    public String getMethodName(@RequestParam String param) {
+        return new String();
+    }
+    
 }
