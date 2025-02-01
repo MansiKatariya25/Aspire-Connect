@@ -41,7 +41,6 @@ function Mentors() {
   }, [searchTerm, mentorData]);
 
   const handleChats = (email) => {
-    
     const filtered = mentorData.filter((mentor) => {
       const emails = mentor.email ? mentor.email.toLowerCase() : "";
 
@@ -49,7 +48,7 @@ function Mentors() {
     });
 
     setChats(filtered);
-    setDashboard(6);
+    setDashboard(11);
   };
   return (
     <div className="absolute w-[85vw] h-[92vh] p-6 right-0 bg-white">
@@ -97,7 +96,9 @@ function Mentors() {
                 <div className="p-2 flex flex-col justify-between h-[180px] w-full">
                   <div className="flex flex-col gap-1">
                     <p className="font-Manrope text-[16px] font-medium">
-                      {mentor?.fname.toUpperCase() + " " + mentor?.lname.toUpperCase() || "Unknown"}
+                      {mentor?.fname.toUpperCase() +
+                        " " +
+                        mentor?.lname.toUpperCase() || "Unknown"}
                     </p>
                     <div className="flex items-center gap-2">
                       <img src="position.svg" alt="Position" />

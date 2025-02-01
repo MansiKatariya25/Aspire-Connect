@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "./Config/axios";
+import Loading from "./Common/Loading";
 
 
 function Protected({ component: Component }) {
@@ -36,7 +37,7 @@ function Protected({ component: Component }) {
   }, [navigate, token]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (!verified) {

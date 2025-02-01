@@ -1,23 +1,53 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../App";
+import api from "../Config/axios";
 
 function Chat() {
   const [messages, setMessages] = useState([]); // Array to store chat messages
   const [newMessage, setNewMessage] = useState(""); // Input field value
-  const { chats, setChats } = useContext(DataContext);
-  // Handle sending a new message
-  const handleSendMessage = () => {
+  const { chats, setChats, userData } = useContext(DataContext); // Get current user email from context
+  
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const resp = await api.get(
+          `/chats/get-messages?receiverEmail=${chats[0].email}`
+        );
+        setMessages(resp.data); // ✅ Set the received messages from API
+      } catch (error) {
+        console.error("Failed to fetch messages:", error);
+      }
+    };
+    if (chats.length > 0) {
+      fetchMessages();
+    }
+  }, [newMessage]);
+
+  const handleSendMessage = async () => {
     if (newMessage.trim()) {
+      const messageObject = {
+        sender: currentUser,
+        receiver: chats[0].email,
+        content: newMessage,
+      };
+
+      // Optimistic UI update (show message immediately)
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: newMessage, sender: "You" },
+        { ...messageObject, timestamp: new Date().toISOString() },
       ]);
-      setNewMessage(""); // Clear input field
+
+      try {
+        await api.post("/chats/send-message", messageObject);
+        setNewMessage(""); // Clear the input field after successful send
+      } catch (error) {
+        console.error("Failed to send message:", error);
+      }
     }
   };
 
   return (
-    <div className="absolute  right-16 top-36 chat-box w-[75vw] h-[600px] bg-white border-2 border-orange-100 rounded-3xl shadow-md flex flex-col">
+    <div className="absolute right-16 top-36 chat-box w-[75vw] h-[600px] bg-white border-2 border-orange-100 rounded-3xl shadow-md flex flex-col">
       {/* Header */}
       <div className="chat-header flex items-center gap-4 p-4 border-b border-gray-200">
         <img
@@ -31,19 +61,21 @@ function Chat() {
       </div>
 
       {/* Message Body */}
-      <div className="chat-body flex-1 p-4 overflow-y-auto">
+      <div className="chat-body flex-1 p-4 overflow-y-auto flex flex-col">
         {messages.length > 0 ? (
           messages.map((message, index) => (
             <div
               key={index}
-              className={`message mb-2 p-2 rounded-md ${
-                message.sender === "You"
+              className={`message mb-2 p-4 rounded-xl w-[50%] max-w-[60%] ${
+                message.sender === userData.email
                   ? "bg-blue-100 text-blue-900 self-end"
                   : "bg-gray-100 text-gray-800 self-start"
               }`}
             >
-              <p className="font-Manrope text-[14px]">{message.text}</p>
-              <p className="text-xs text-gray-500 mt-1">{message.sender}</p>
+              <p className="font-Manrope text-[14px]">{message.content}</p>
+              <p className="text-xs text-gray-500 mt-1">
+                {new Date(message.timestamp).toLocaleTimeString()}
+              </p>
             </div>
           ))
         ) : (

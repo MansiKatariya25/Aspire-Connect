@@ -34,7 +34,7 @@ public class UserController {
     private OtpService otpservice;
     @Autowired
     private JwtUtil jwtutil;
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 
     // Endpoint to register a new user
 
