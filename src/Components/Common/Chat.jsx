@@ -5,28 +5,36 @@ import api from "../Config/axios";
 function Chat() {
   const [messages, setMessages] = useState([]); // Array to store chat messages
   const [newMessage, setNewMessage] = useState(""); // Input field value
-  const { chats, setChats, userData } = useContext(DataContext); // Get current user email from context
-  
+  const { chats, userData } = useContext(DataContext); // Get current user data
+
   useEffect(() => {
+    let interval;
     const fetchMessages = async () => {
       try {
         const resp = await api.get(
           `/chats/get-messages?receiverEmail=${chats[0].email}`
         );
-        setMessages(resp.data); // ✅ Set the received messages from API
+        if (resp.data === "No messages found!") return;
+        setMessages(resp.data); // Set the received messages from API
       } catch (error) {
         console.error("Failed to fetch messages:", error);
       }
     };
-    if (chats.length > 0) {
-      fetchMessages();
-    }
-  }, [newMessage]);
 
+    if (chats.length > 0) {
+      fetchMessages(); // Initial fetch
+      interval = setInterval(fetchMessages, 2000); // Fetch every 2 seconds
+    }
+
+    // ** Cleanup interval on component unmount **
+    return () => clearInterval(interval);
+  }, [chats, userData.email]);
+
+  // ** Handle Sending a New Message **
   const handleSendMessage = async () => {
     if (newMessage.trim()) {
       const messageObject = {
-        sender: currentUser,
+        sender: userData.email,
         receiver: chats[0].email,
         content: newMessage,
       };
@@ -51,12 +59,18 @@ function Chat() {
       {/* Header */}
       <div className="chat-header flex items-center gap-4 p-4 border-b border-gray-200">
         <img
-          src={chats[0].profile_pic}
+          src={chats[0].profile_pic || chats[0].user.profile_pic}
           alt={`${chats[0].fname + " " + chats[0].lname}'s profile`}
           className="w-10 h-10 rounded-full"
         />
         <p className="font-Manrope text-[16px] font-medium">
-          {chats[0].fname + " " + chats[0].lname}
+          {chats[0].fname && chats[0].lname
+            ? `${chats[0].fname.toUpperCase()} ${chats[0].lname.toUpperCase()}`
+            : chats[0].user && chats[0].user.fname && chats[0].user.lname
+            ? `${chats[0].user.fname.toUpperCase()} ${chats[0].user.lname.toUpperCase()}`
+            : chats[0].fname
+            ? chats[0].fname.toUpperCase()
+            : chats[0].user?.fname?.toUpperCase() || ""}
         </p>
       </div>
 

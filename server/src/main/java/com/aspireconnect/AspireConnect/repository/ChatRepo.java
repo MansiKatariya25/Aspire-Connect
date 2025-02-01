@@ -1,5 +1,6 @@
 package com.aspireconnect.AspireConnect.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -9,6 +10,11 @@ import com.aspireconnect.AspireConnect.model.Chat;
 
 @Repository
 public interface ChatRepo extends MongoRepository<Chat, String> {
-    Optional<Chat> findBySenderEmailAndReceiverEmail(String senderEmail, String receiverEmail);
+
+    List<Chat> findBySenderEmailAndReceiverEmailOrSenderEmailAndReceiverEmail(
+            String senderEmail1, String receiverEmail1,
+            String senderEmail2, String receiverEmail2);
+
+    List<Chat> findBySenderEmailOrReceiverEmail(String senderEmail, String receiverEmail);
 
 }

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../App";
-import { useNavigate } from "react-router-dom";
 import api from "../Config/axios";
 import Loading from "../Common/Loading";
 
@@ -19,7 +18,6 @@ function Sidebar() {
         setTimeout(() => {
           setIsLoading(false);
         }, 1500);
-        console.log(response.data);
       } catch (error) {
         console.error("Failed to fetch user data:", error);
         setIsLoading(false); // Ensure we stop loading even if there's an error
