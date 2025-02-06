@@ -27,6 +27,14 @@ public class User {
     private String stippend;
     private String jobType;
     private String jobDescription;
+    private String description;
+    private String jobPosition;
+    private String jobLocation;
+    private String jobSkills;
+    private String jobPerks;
+    private String jobDuration;
+    private String openings;
+    private String otherRequirement;
     private String followers;
     private List<JobPost> jobPosts;
 
@@ -43,10 +51,21 @@ public class User {
     }
 
     
+    
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public User(String id, String fname, String lname, String email, String password, String gender, String age,
             String role, String position, String exp, String sessions, String skills, String profile_pic,
             String compName, String compAddress, String stippend, String jobType, String jobDescription,
-            List<JobPost> jobPosts) {
+            String description, String jobPosition, String jobLocation, String jobSkills, String jobPerks,
+            String jobDuration,String openings, String otherRequirement, String followers, List<JobPost> jobPosts) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
@@ -65,15 +84,16 @@ public class User {
         this.stippend = stippend;
         this.jobType = jobType;
         this.jobDescription = jobDescription;
+        this.description = description;
+        this.jobPosition = jobPosition;
+        this.jobLocation = jobLocation;
+        this.jobSkills = jobSkills;
+        this.jobPerks = jobPerks;
+        this.jobDuration = jobDuration;
+        this.openings = openings;
+        this.otherRequirement = otherRequirement;
+        this.followers = followers;
         this.jobPosts = jobPosts;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getAge() {
@@ -212,6 +232,71 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getJobPosition() {
+        return jobPosition;
+    }
+
+    public void setJobPosition(String jobPosition) {
+        this.jobPosition = jobPosition;
+    }
+
+    public String getJobLocation() {
+        return jobLocation;
+    }
+
+    public void setJobLocation(String jobLocation) {
+        this.jobLocation = jobLocation;
+    }
+
+    public String getJobSkills() {
+        return jobSkills;
+    }
+
+    public void setJobSkills(String jobSkills) {
+        this.jobSkills = jobSkills;
+    }
+
+    public String getJobPerks() {
+        return jobPerks;
+    }
+
+    public void setJobPerks(String jobPerks) {
+        this.jobPerks = jobPerks;
+    }
+
+    public String getJobDuration() {
+        return jobDuration;
+    }
+
+    public void setJobDuration(String jobDuration) {
+        this.jobDuration = jobDuration;
+    }
+
+    public String getOtherRequirement() {
+        return otherRequirement;
+    }
+
+    public void setOtherRequirement(String otherRequirement) {
+        this.otherRequirement = otherRequirement;
+    }
+
+    public String getOpenings() {
+        return openings;
+    }
+
+    public void setOpenings(String openings) {
+        this.openings = openings;
+    }
+
 
     // toString method (optional, for debugging/logging purposes)
     @Override

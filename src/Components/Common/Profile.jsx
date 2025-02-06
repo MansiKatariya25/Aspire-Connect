@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../App";
 import api from "../Config/axios";
 
-function Profile() {
+function Profile({}) {
   const { userData, setUserData, setDashboard } = useContext(DataContext);
   const [profile_pic, setProfilePic] = useState(
     "https://avatar.iran.liara.run/public"

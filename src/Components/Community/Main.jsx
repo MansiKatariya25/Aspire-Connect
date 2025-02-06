@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useState } from "react";
+import PostAction from "./PostAction";
+import Content from "./Content";
 
 function Main() {
+  const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className='absolute top-12 w-[85vw] h-[92vh] p-6 right-0 bg-white'>
-        <div className='p-2 flex flex-col gap-2'>
-            <p className='font-Roboto text-[20px] font-medium'>
-            Welcome to the Community
-            </p>
-            <p className='text-gray-600'>
-            Here you can interact with other users, share your thoughts, and
-            discuss topics of interest. You can also view posts from companies and
-            apply for jobs.
-            </p>
+    <div className="flex justify-center items-center">
+      <div className="absolute top-12 w-[50vw]  p-6 right-[20vw]  bg-white shadow-md ">
+        <div className="p-2 flex flex-col gap-2">
+          <p className="font-Roboto text-[25px] font-medium">Community</p>
+          <div className="">
+            <div className="border border-gray-300 rounded-md p-3 w-[95%] flex justify-start items-center gap-4">
+              <img src="search.svg" className="text-gray-500" />
+              <input
+                type="text"
+                value={searchTerm}
+                placeholder="Search users here...."
+                className="searchbar w-full outline-none font-Manrope"
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+          <PostAction />
+          <Content />
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;
