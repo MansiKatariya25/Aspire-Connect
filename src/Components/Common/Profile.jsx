@@ -43,9 +43,37 @@ function Profile({}) {
     };
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+
+  // };
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    try {
+      const token = localStorage.getItem("token"); // Ensure the user is authenticated
+  
+      const response = await api.put("/users/update-profile", userData, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.status === 200) {
+        alert("Profile updated successfully!");
+      } else {
+        alert("Failed to update profile.");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error.response?.data || error.message);
+      alert("Error updating profile.");
+    }
   };
+
 
   return (
     <div className="fixed font-Manrope z-50 bg-gray-700/30 backdrop-blur-sm w-screen h-screen flex justify-center items-center ">
@@ -223,10 +251,10 @@ function Profile({}) {
                     required
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
-                    value={userData.gender}
+                    value={userData.description}
                     placeholder="Description about you"
                     onChange={(e) =>
-                      setUserData({ ...userData, gender: e.target.value })
+                      setUserData({ ...userData, description: e.target.value })
                     }
                   />
                 </div>
@@ -285,15 +313,16 @@ function Profile({}) {
               ""
             )}
           </div>
+
+          <div className=" flex justify-end ">
+            <button
+              type="submit"
+              className="bg-[#FF8C42] p-2 text-white rounded-lg px-4"
+            >
+              Save
+            </button>
+          </div>
         </form>
-        <div className=" flex justify-end ">
-          <button
-            type="submit"
-            className="bg-[#FF8C42] p-2 text-white rounded-lg px-4"
-          >
-            Save
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -20,8 +20,6 @@ import com.aspireconnect.AspireConnect.model.User;
 import com.aspireconnect.AspireConnect.service.OtpService;
 import com.aspireconnect.AspireConnect.service.UserService;
 import com.aspireconnect.AspireConnect.util.JwtUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/users")
@@ -142,5 +140,43 @@ public class UserController {
         List<User> user = userService.getUserByQuery(email);
         return ResponseEntity.ok(user);
     }
+
+    @PutMapping("/update-profile")
+public ResponseEntity<?> updateUserProfile(@RequestBody User updatedUser, @RequestHeader("Authorization") String authorizationHeader) {
+    try {
+        // Extract user email from authentication token
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        // Fetch existing user data
+        User existingUser = userService.getUserByEmail(email);
+
+        if (existingUser == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+
+        // Update only the provided fields
+        if (updatedUser.getFname() != null) existingUser.setFname(updatedUser.getFname());
+        if (updatedUser.getLname() != null) existingUser.setLname(updatedUser.getLname());
+        if (updatedUser.getAge() != null) existingUser.setAge(updatedUser.getAge());
+        if (updatedUser.getGender() != null) existingUser.setGender(updatedUser.getGender());
+        if (updatedUser.getPosition() != null) existingUser.setPosition(updatedUser.getPosition());
+        if (updatedUser.getExp() != null) existingUser.setExp(updatedUser.getExp());
+        if (updatedUser.getSessions() != null) existingUser.setSessions(updatedUser.getSessions());
+        if (updatedUser.getSkills() != null) existingUser.setSkills(updatedUser.getSkills());
+        if (updatedUser.getProfile_pic() != null) existingUser.setProfile_pic(updatedUser.getProfile_pic());
+        if (updatedUser.getCompName() != null) existingUser.setCompName(updatedUser.getCompName());
+        if (updatedUser.getCompAddress() != null) existingUser.setCompAddress(updatedUser.getCompAddress());
+        if (updatedUser.getDescription() != null) existingUser.setDescription(updatedUser.getDescription());
+
+        // Save the updated user data
+        userService.updateUser(existingUser);
+
+        return ResponseEntity.ok(existingUser);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating profile: " + e.getMessage());
+    }
+}
+
 
 }
