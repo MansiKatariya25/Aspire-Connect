@@ -13,6 +13,7 @@ import Main from "../Community/Main";
 import Posts from "../Company/Posts";
 import Notification from "../Common/Notification";
 import ChatDash from "../Common/ChatDash";
+import ViewersProfile from "../Common/ViewersProfile";
 
 function Dashboard() {
   const { dashboard, setDashboard, userData } = useContext(DataContext);
@@ -29,7 +30,13 @@ function Dashboard() {
       <div className="flex justify-between">
         <Sidebar />
 
-        {dashboard == 0  ? userData.role == "Student"? <Content /> : <Main />: null}
+        {dashboard == 0 ? (
+          userData.role == "Student" ? (
+            <Content />
+          ) : (
+            <Main />
+          )
+        ) : null}
         {dashboard == 1 && <Jobs />}
         {dashboard == 4 && <MockTest />}
         {dashboard == 5 && <Response />}
@@ -39,6 +46,7 @@ function Dashboard() {
         {dashboard == 9 && <Posts />}
         {dashboard == 10 && <Notification />}
         {dashboard == 11 && <Chat />}
+        {dashboard == 12 && <ViewersProfile />}
         {isLoading && <Loading />}
       </div>
     </div>

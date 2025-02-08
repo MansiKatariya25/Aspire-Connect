@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DataContext } from "../../App";
 import api from "../Config/axios";
 
@@ -6,28 +6,38 @@ function Chat() {
   const [messages, setMessages] = useState([]); // Array to store chat messages
   const [newMessage, setNewMessage] = useState(""); // Input field value
   const { chats, userData } = useContext(DataContext); // Get current user data
-
+  const intervalRef = useRef(null);
+  
   useEffect(() => {
-    let interval;
     const fetchMessages = async () => {
+      if (chats.length === 0) return; // Prevent unnecessary calls
       try {
+        const receiverEmail = chats[0]?.email || chats?.user?.email;
+        if (!receiverEmail) return; // Prevent errors
+
         const resp = await api.get(
-          `/chats/get-messages?receiverEmail=${chats[0].email}`
+          `/chats/get-messages?receiverEmail=${receiverEmail}`
         );
-        if (resp.data === "No messages found!") return;
-        setMessages(resp.data); // Set the received messages from API
+        if (resp.data !== "No messages found!") {
+          setMessages(resp.data);
+        }
       } catch (error) {
         console.error("Failed to fetch messages:", error);
       }
     };
 
-    if (chats.length > 0) {
-      fetchMessages(); // Initial fetch
-      interval = setInterval(fetchMessages, 2000); // Fetch every 2 seconds
-    }
+    // Initial Fetch
+    fetchMessages();
 
-    // ** Cleanup interval on component unmount **
-    return () => clearInterval(interval);
+    // **Set Interval for Auto-Refresh**
+    intervalRef.current = setInterval(fetchMessages, 5000); // Fetch every 5 seconds instead of 2
+
+    // **Cleanup interval on component unmount**
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [chats, userData.email]);
 
   // ** Handle Sending a New Message **
@@ -35,7 +45,7 @@ function Chat() {
     if (newMessage.trim()) {
       const messageObject = {
         sender: userData.email,
-        receiver: chats[0].email,
+        receiver: chats[0]?.email|| chats?.user?.email,
         content: newMessage,
       };
 
@@ -59,18 +69,18 @@ function Chat() {
       {/* Header */}
       <div className="chat-header flex items-center gap-4 p-4 border-b border-gray-200">
         <img
-          src={chats[0].profile_pic || chats[0].user.profile_pic}
-          alt={`${chats[0].fname + " " + chats[0].lname}'s profile`}
+          src={chats[0]?.profile_pic || chats[0]?.user?.profile_pic|| chats?.user?.profile_pic}
+          alt={`${chats[0]?.fname || chats?.user?.fname + " " + chats[0]?.lname}'s profile`}
           className="w-10 h-10 rounded-full"
         />
         <p className="font-Manrope text-[16px] font-medium">
-          {chats[0].fname && chats[0].lname
-            ? `${chats[0].fname.toUpperCase()} ${chats[0].lname.toUpperCase()}`
-            : chats[0].user && chats[0].user.fname && chats[0].user.lname
-            ? `${chats[0].user.fname.toUpperCase()} ${chats[0].user.lname.toUpperCase()}`
-            : chats[0].fname
-            ? chats[0].fname.toUpperCase()
-            : chats[0].user?.fname?.toUpperCase() || ""}
+          {chats[0]?.fname || chats?.user?.fname && chats[0]?.lname || chats?.user?.lname
+            ? `${chats[0]?.fname?.toUpperCase() || chats?.user?.fname?.toUpperCase()} ${chats[0]?.lname?.toUpperCase() || chats?.user?.lname?.toUpperCase()}`
+            : chats[0]?.user && chats[0]?.user?.fname && chats[0]?.user?.lname
+            ? `${chats[0]?.user?.fname?.toUpperCase()} ${chats[0]?.user?.lname?.toUpperCase()}`
+            : chats[0]?.fname
+            ? chats[0]?.fname?.toUpperCase()
+            : chats[0]?.user?.fname?.toUpperCase() || ""}
         </p>
       </div>
 

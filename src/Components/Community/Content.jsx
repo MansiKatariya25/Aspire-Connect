@@ -1,39 +1,103 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import api from "../Config/axios";
+import { DataContext } from "../../App";
 
 function Content() {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const {setDashboard,setChats} = useContext(DataContext)
+
+  // Fetch posts from the API
+  useEffect(() => {
+    api
+      .get("/community/get-posts")
+      .then((response) => {
+        setPosts(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching posts:", err);
+        setError("Failed to load posts");
+        setLoading(false);
+      });
+  }, []);
+  const handleView = (post)=>{
+    setChats(post)
+    setDashboard(12)
+
+  }
   return (
-    <div className="w-[95%] h-[50%] bg-slate-100 rounded-md p-2">
-      <div className="p-2 flex gap-4">
-        <img src="man.png" className="w-[50px] h-[50px] rounded-full" />
-        <div>
-          <p className="font-Manrope font-bold text-[18px]">Raj Singh</p>
-          <p>"Software Developer in Transition | Web developer/Frontend D</p>
-        </div>
-      </div>
-      <div className="mt-6 flex flex-col justify-center items-center gap-4">
-        <p>
-          🚀 Mastering APIs in React: Unlock Your App’s Full Potential!
-          <br /> APIs are the backbone of modern web apps, and integrating them
-          in React is a skill every developer must master.
-          <br /> Here’s how you can efficiently handle APIs in React:
-          <br /> 🌐 Fetch like a pro: Use fetch() or axios for API calls. Don’t
-          forget to handle errors gracefully.
-        </p>
-        <img src="post.jpg" className="h-[600px] w-[600px]" />
-      </div>
-      <div className="p-4 w-[98%] h-[10%] flex justify-between">
-        <div className="p-2 px-4 flex items-center gap-2">
-          <img
-            src="like.svg"
-            className=""
-          />
-          <p className="font-Manrope font-medium">Like</p>
-        </div>
-        <div className="flex items-center border-2 border-black rounded-full p-2">
-          <img src="plus.svg" alt="" />
-          <p className="font-Manrope font-medium">Follow</p>
-        </div>
-      </div>
+    <div className="w-[95%] flex flex-col items-center gap-6 font-Manrope">
+      {/* Show Loading State */}
+      {loading && <p className="text-center font-bold">Loading posts...</p>}
+
+      {/* Show Error Message */}
+      {error && <p className="text-center text-red-500">{error}</p>}
+
+      {/* Render Posts Dynamically */}
+      {!loading &&
+        !error &&
+        posts.map((post) => (
+          <div
+            key={post.id}
+            className="w-full bg-slate-100 rounded-md p-4 font-Manrope"
+          >
+            <div className="p-2 flex gap-4">
+              <img
+               onClick={() => {handleView(post)}}
+                src={
+                  post.user?.profile_pic ||
+                  "https://avatar.iran.liara.run/public"
+                }
+                className="w-[50px] h-[50px] rounded-full hover:scale-110 transition-all duration-150 cursor-pointer"
+                alt="Profile"
+              />
+              <div>
+                <p className="font-Manrope font-bold text-[18px]">
+                  {post.user
+                    ? post.user?.fname.toUpperCase() +
+                      " " +
+                      post.user?.lname.toUpperCase()
+                    : "Unknown User"}
+                </p>
+                <p className="text-gray-500 ">
+                  {post.user ? post.user.email : "No email"}
+                </p>
+                <p className="border border-orange-600 text-center bg-orange-200 p-2 rounded-full w-[100px] font-Manrope font-bold text-[12px] h-[30px] mt-2">
+                  {post.user?.role.toUpperCase()}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col justify-center items-start gap-4">
+              <p>{post.content}</p>
+              {post.image && (
+                <img
+                  src={post.image}
+                  className="h-full w-full rounded-md"
+                  alt="Post"
+                />
+              )}
+            </div>
+
+            <div className="p-4 w-[98%] h-[10%] flex justify-between">
+              <div className="p-2 px-4 flex items-center gap-2 cursor-pointer">
+                <img
+                  className="hover:bg-gray-200 rounded-full p-2"
+                  src="like.svg"
+                  alt="Like"
+                />
+                <p className="font-Manrope font-medium">{post.like} Likes</p>
+              </div>
+              <div className="flex items-center border-2 border-black rounded-full p-2 cursor-pointer">
+                <img src="plus.svg" alt="Follow" />
+                <p className="font-Manrope font-medium">Follow</p>
+              </div>
+            </div>
+          </div>
+        ))}
     </div>
   );
 }

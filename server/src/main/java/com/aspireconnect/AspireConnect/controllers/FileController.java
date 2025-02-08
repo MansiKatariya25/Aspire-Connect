@@ -97,9 +97,5 @@ public class FileController {
     // }
     // }
 
-    @GetMapping("path")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
-    }
     
 }

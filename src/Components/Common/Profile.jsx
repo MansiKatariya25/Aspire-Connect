@@ -56,7 +56,7 @@ function Profile({}) {
             src="./fback.png"
             width={"20px"}
             alt=""
-            srcset=""
+            srcSet=""
           />
           <h1 className="text-3xl font-bold w-full text-center ">Profile</h1>
           <h1 className="text-xl font-bold text-gray-400 ">
@@ -79,7 +79,7 @@ function Profile({}) {
               className="w-[20px] hover:scale-105"
               src="pen.png"
               alt=""
-              srcset=""
+              srcSet=""
               onClick={handleFileUpload}
             />
             <p>{userData.email}</p>

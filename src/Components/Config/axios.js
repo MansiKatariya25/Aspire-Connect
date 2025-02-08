@@ -1,6 +1,5 @@
 // Create a new file: src/config/axios.js
 import axios from 'axios';
-console.log("creating axios..")
 const api = axios.create({
   baseURL: 'http://localhost:8000/api',
   headers: {

@@ -1,6 +1,6 @@
 package com.aspireconnect.AspireConnect.model;
 
-import java.lang.reflect.Array;
+
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -25,32 +25,14 @@ public class User {
     private String compName;
     private String compAddress;
     private String stippend;
-    private String jobType;
-    private String jobDescription;
     private String description;
-    private String jobPosition;
-    private String jobLocation;
-    private String jobSkills;
-    private String jobPerks;
-    private String jobDuration;
-    private String openings;
-    private String otherRequirement;
-    private String followers;
-    private List<JobPost> jobPosts;
+    private String followers = "0";
+
 
     // Default constructor
     public User() {
     }
 
-    public List<JobPost> getJobPosts() {
-        return jobPosts;
-    }
-
-    public void setJobPosts(List<JobPost> jobPosts) {
-        this.jobPosts = jobPosts;
-    }
-
-    
     
 
     public String getGender() {
@@ -82,18 +64,6 @@ public class User {
         this.compName = compName;
         this.compAddress = compAddress;
         this.stippend = stippend;
-        this.jobType = jobType;
-        this.jobDescription = jobDescription;
-        this.description = description;
-        this.jobPosition = jobPosition;
-        this.jobLocation = jobLocation;
-        this.jobSkills = jobSkills;
-        this.jobPerks = jobPerks;
-        this.jobDuration = jobDuration;
-        this.openings = openings;
-        this.otherRequirement = otherRequirement;
-        this.followers = followers;
-        this.jobPosts = jobPosts;
     }
 
     public String getAge() {
@@ -134,22 +104,6 @@ public class User {
 
     public void setStippend(String stippend) {
         this.stippend = stippend;
-    }
-
-    public String getJobType() {
-        return jobType;
-    }
-
-    public void setJobType(String jobType) {
-        this.jobType = jobType;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
     }
 
     public String getExp() {
@@ -239,62 +193,6 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getJobPosition() {
-        return jobPosition;
-    }
-
-    public void setJobPosition(String jobPosition) {
-        this.jobPosition = jobPosition;
-    }
-
-    public String getJobLocation() {
-        return jobLocation;
-    }
-
-    public void setJobLocation(String jobLocation) {
-        this.jobLocation = jobLocation;
-    }
-
-    public String getJobSkills() {
-        return jobSkills;
-    }
-
-    public void setJobSkills(String jobSkills) {
-        this.jobSkills = jobSkills;
-    }
-
-    public String getJobPerks() {
-        return jobPerks;
-    }
-
-    public void setJobPerks(String jobPerks) {
-        this.jobPerks = jobPerks;
-    }
-
-    public String getJobDuration() {
-        return jobDuration;
-    }
-
-    public void setJobDuration(String jobDuration) {
-        this.jobDuration = jobDuration;
-    }
-
-    public String getOtherRequirement() {
-        return otherRequirement;
-    }
-
-    public void setOtherRequirement(String otherRequirement) {
-        this.otherRequirement = otherRequirement;
-    }
-
-    public String getOpenings() {
-        return openings;
-    }
-
-    public void setOpenings(String openings) {
-        this.openings = openings;
     }
 
 
