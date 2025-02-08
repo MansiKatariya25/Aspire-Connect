@@ -1,5 +1,7 @@
 package com.aspireconnect.AspireConnect.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,11 @@ public class UserService {
         } catch (Exception e) {
             return null;
         }
+
+    }
+
+    public List<User> getUserByQuery(String email) {
+        return userRepository.findByEmailContainingIgnoreCase(email);
 
     }
 

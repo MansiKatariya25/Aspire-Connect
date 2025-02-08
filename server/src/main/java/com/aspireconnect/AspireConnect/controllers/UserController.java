@@ -1,5 +1,6 @@
 package com.aspireconnect.AspireConnect.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,6 @@ public class UserController {
     @Autowired
     private JwtUtil jwtutil;
 
-
     // Endpoint to register a new user
 
     @PostMapping("/auth/register")
@@ -60,6 +60,10 @@ public class UserController {
 
         try {
             String email = entity.getEmail();
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
             User result = userService.loginUser(email);
             String token = jwtutil.generateToken(email);
             if (passwordEncoder.matches(entity.getPassword(), result.getPassword())) {
@@ -132,6 +136,11 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         return ResponseEntity.ok(userService.getUserByEmail(email));
+    }
+    @GetMapping("/get-user-data-by-query/{email}")
+    public ResponseEntity<?> getUserDataById(@PathVariable String email) {
+        List<User> user = userService.getUserByQuery(email);
+        return ResponseEntity.ok(user);
     }
 
 }

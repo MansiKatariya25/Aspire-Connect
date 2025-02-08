@@ -78,7 +78,7 @@ function Sidebar() {
                 src="./pen.png"
                 className="w-[20px] h-[20px]"
                 alt=""
-                srcset=""
+                srcSet=""
               />
             </div>
           </div>

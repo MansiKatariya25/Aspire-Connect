@@ -22,6 +22,7 @@ function App() {
   const [question, setQue] = useState([]);
   const [chats, setChats] = useState([]);
   const [userData,setUserData] = useState([])
+  console.log(userData)
 
   return (
     <DataContext.Provider

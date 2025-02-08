@@ -1,16 +1,47 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { DataContext } from "../../App";
+import api from "../Config/axios";
+import { toast } from "react-toastify";
 
 function Posts() {
-  const { userData, setUserData } = useContext(DataContext);
+  const [jobPosition, SetJobPosition] = useState("");
+  const [jobLocation, SetJobLocation] = useState("");
+  const [jobType, SetJobType] = useState("");
+  const [jobDuration, SetJobDuration] = useState("");
+  const [stipend, SetStipend] = useState("");
+  const [jobOpening, SetJobOpening] = useState("");
+  const [jobSkills, SetJobSkills] = useState("");
+  const [jobPerks, SetJobPerks] = useState("");
+  const [jobDescr, SetJobDescr] = useState("");
+  const [otherReq, SetOtherReq] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    try {
+      const resp = api.post("/jobs/jobPost", {
+        jobPosition: jobPosition,
+        jobLocation: jobLocation,
+        jobType: jobType,
+        jobDuration: jobDuration,
+        Stipend: stipend,
+        openings: jobOpening,
+        jobSkills: jobSkills,
+        jobPerks: jobPerks,
+        jobDescription: jobDescr,
+        otherRequirement: otherReq,
+      });
+      if (resp) {
+        toast.success("Jobposted succesfully");
+        console.log(resp.data);
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
     <div className="absolute top-12 w-[85vw] h-[92vh] pt-12 px-12 right-0 bg-white flex flex-col justify-start items-center ">
-      
       <div className="flex justify-start items-center  hover:text-blue-400 cursor-pointer ">
         <img src="back.svg" className="text-black" />
         <p className="text-xl font-Manrope p-4 undeline">
@@ -30,10 +61,8 @@ function Posts() {
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
                     placeholder="Enter job position"
-                    value={userData.jobPosition}
-                    onChange={(e) =>
-                      setUserData({ ...userData, jobPosition: e.target.value })
-                    }
+                    value={jobPosition}
+                    onChange={(e) => SetJobPosition(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col w-[50%]">
@@ -43,10 +72,8 @@ function Posts() {
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
                     placeholder="Work from home / office"
-                    value={userData.jobLocation}
-                    onChange={(e) =>
-                      setUserData({ ...userData, jobLocation: e.target.value })
-                    }
+                    value={jobLocation}
+                    onChange={(e) => SetJobLocation(e.target.value)}
                   />
                 </div>
               </div>
@@ -58,59 +85,49 @@ function Posts() {
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
                     placeholder="Part-time , Full-time , Internship...."
-                    value={userData.jobType}
-                    onChange={(e) =>
-                      setUserData({ ...userData, jobType: e.target.value })
-                    }
+                    value={jobType}
+                    onChange={(e) => SetJobType(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col w-[50%]">
-                <label className="text-gray-400">Job Duration</label>
+                  <label className="text-gray-400">Job Duration</label>
                   <input
                     required
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
                     placeholder="Enter minimum duration of job"
-                    value={userData.jobDuration}
-                    onChange={(e) =>
-                      setUserData({ ...userData, jobDuration: e.target.value })
-                    }
+                    value={jobDuration}
+                    onChange={(e) => SetJobDuration(e.target.value)}
                   />
                 </div>
               </div>
 
               <div className="flex w-full gap-2">
                 <div className="flex flex-col w-[50%]">
-                  <label className="text-gray-400">Stippend</label>
+                  <label className="text-gray-400">Stipend</label>
                   <input
                     required
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
-                    placeholder="Enter Stippend"
-                    value={userData.stippend}
-                    onChange={(e) =>
-                      setUserData({ ...userData, stippend: e.target.value })
-                    }
+                    placeholder="Enter Stipend"
+                    value={stipend}
+                    onChange={(e) => SetStipend(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col w-[50%]">
-                  
                   <label className="text-gray-400">Number of openings</label>
                   <input
                     required
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
                     placeholder="Number of openings for the role"
-                    value={userData.openings}
-                    onChange={(e) =>
-                      setUserData({ ...userData, openings: e.target.value })
-                    }
+                    value={jobOpening}
+                    onChange={(e) => SetJobOpening(e.target.value)}
                   />
                 </div>
               </div>
               <div className="flex w-full gap-2">
                 <div className="flex flex-col w-[50%]">
-                  
                   <label className="text-gray-400">Job Skills</label>
                   <textarea
                     required
@@ -118,24 +135,20 @@ function Posts() {
                     rows="4"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none resize-none"
                     placeholder="skills required for job"
-                    value={userData.jobSkills}
-                    onChange={(e) =>
-                      setUserData({ ...userData, jobSkills: e.target.value })
-                    }
+                    value={jobSkills}
+                    onChange={(e) => SetJobSkills(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="flex flex-col w-[50%]">
-                <label className="text-gray-400">Job Perks</label>
+                  <label className="text-gray-400">Job Perks</label>
                   <textarea
                     required
                     type="text"
                     rows="4"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none resize-none"
                     placeholder="Enter Job Perks"
-                    value={userData.jobPerks}
-                    onChange={(e) =>
-                      setUserData({ ...userData, jobPerks: e.target.value })
-                    }
+                    value={jobPerks}
+                    onChange={(e) => SetJobPerks(e.target.value)}
                   ></textarea>
                 </div>
               </div>
@@ -147,13 +160,8 @@ function Posts() {
                     className="w-full p-2 border border-gray-300 rounded-md outline-none resize-none"
                     placeholder="Enter Job Description here......."
                     rows="4"
-                    value={userData.jobDescription}
-                    onChange={(e) =>
-                      setUserData({
-                        ...userData,
-                        jobDescription: e.target.value,
-                      })
-                    }
+                    value={jobDescr}
+                    onChange={(e) => SetJobDescr(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="flex flex-col w-[50%]">
@@ -163,13 +171,8 @@ function Posts() {
                     className="w-full p-2 border border-gray-300 rounded-md outline-none resize-none"
                     placeholder="Enter other requirements here"
                     rows="4"
-                    value={userData.otherRequirement}
-                    onChange={(e) =>
-                      setUserData({
-                        ...userData,
-                        otherRequirement: e.target.value,
-                      })
-                    }
+                    value={otherReq}
+                    onChange={(e) => SetOtherReq(e.target.value)}
                   ></textarea>
                 </div>
               </div>
@@ -185,7 +188,6 @@ function Posts() {
           </div>
         </form>
       </div>
-     
     </div>
   );
 }

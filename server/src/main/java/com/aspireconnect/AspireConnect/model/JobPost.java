@@ -11,7 +11,6 @@ public class JobPost {
     private String Stipend;
     private String jobDescription;
     private String jobPosition;
-    
     private String jobSkills;
     private String jobPerks;
     private String jobDuration;
@@ -62,7 +61,7 @@ public class JobPost {
         return Stipend;
     }
     public void setStipend(String Stipend) {
-        Stipend = Stipend;
+       this.Stipend = Stipend;
     }
     public String getJobDescription() {
         return jobDescription;

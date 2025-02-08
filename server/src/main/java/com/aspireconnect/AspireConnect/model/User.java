@@ -1,6 +1,5 @@
 package com.aspireconnect.AspireConnect.model;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -25,8 +24,7 @@ public class User {
     private String compName;
     private String compAddress;
     private String description;
-    private String followers;
-
+    private String followers = "0";
 
     // Default constructor
     public User() {
@@ -44,7 +42,7 @@ public class User {
             String role, String position, String exp, String sessions, String skills, String profile_pic,
             String compName, String compAddress, String stippend, String jobType, String jobDescription,
             String description, String jobPosition, String jobLocation, String jobSkills, String jobPerks,
-            String jobDuration,String openings, String otherRequirement, String followers, List<JobPost> jobPosts) {
+            String jobDuration, String openings, String otherRequirement, String followers, List<JobPost> jobPosts) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
@@ -61,7 +59,7 @@ public class User {
         this.compName = compName;
         this.compAddress = compAddress;
         this.description = description;
-        
+
     }
 
     public String getAge() {
@@ -184,8 +182,6 @@ public class User {
     public void setDescription(String description) {
         this.description = description;
     }
-
-   
 
     // toString method (optional, for debugging/logging purposes)
     @Override
