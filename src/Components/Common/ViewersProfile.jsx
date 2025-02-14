@@ -95,6 +95,8 @@ export default function ViewersProfile() {
             {user[0]?.fname?.toUpperCase()} {user[0]?.lname?.toUpperCase()}
           </h2>
           <p className="text-gray-500">@{user[0]?.email}</p>
+          <p className="text-lg mt-2 font-bold">Bio</p>
+          <p className="text-gray-500 w-full p-2 text-sm">{user[0]?.description}</p>
           <div className="mt-4 flex gap-4 items-center">
             <p className="font-semibold">
               {user[0]?.followers?.length || 0} Followers
