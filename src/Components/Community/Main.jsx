@@ -31,7 +31,7 @@ function Main() {
 
   return (
     <div className="flex justify-center items-center font-Manrope">
-      <div className="absolute top-12 w-[50vw] p-6 right-[20vw] bg-white shadow-md">
+      <div className="absolute top-12 w-[45vw] p-6 right-[20vw] bg-white shadow-md">
         <div className="p-2 flex flex-col gap-2">
           <p className="font-Roboto text-[25px] font-medium">Community</p>
           <div>

@@ -15,6 +15,8 @@ function Posts() {
   const [jobDescr, SetJobDescr] = useState("");
   const [otherReq, SetOtherReq] = useState("");
 
+  const { userData, setUserData, setDashboard } = useContext(DataContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,11 +34,11 @@ function Posts() {
         otherRequirement: otherReq,
       });
       if (resp) {
-        toast.success("Jobposted succesfully");
+        toast.success("Job posted succesfully");
         console.log(resp.data);
       }
     } catch (error) {
-      alert(error);
+      toast.error(error);
     }
   };
 
@@ -44,7 +46,7 @@ function Posts() {
     <div className="absolute top-12 w-[85vw] h-[92vh] pt-12 px-12 right-0 bg-white flex flex-col justify-start items-center ">
       <div className="flex justify-start items-center  hover:text-blue-400 cursor-pointer ">
         <img src="back.svg" className="text-black" />
-        <p className="text-xl font-Manrope p-4 undeline">
+        <p className="text-xl font-Manrope p-4 undeline" onClick={()=>{setDashboard(13)}}>
           See Previously posted Jobs here....{" "}
         </p>
       </div>
@@ -118,7 +120,7 @@ function Posts() {
                   <label className="text-gray-400">Number of openings</label>
                   <input
                     required
-                    type="text"
+                    type="number"
                     className="w-full p-2 border border-gray-300 rounded-md outline-none"
                     placeholder="Number of openings for the role"
                     value={jobOpening}

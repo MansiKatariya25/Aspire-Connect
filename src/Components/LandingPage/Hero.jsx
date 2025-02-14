@@ -14,11 +14,6 @@ function Hero() {
           <p className="-translate-y-12 p-4 text-[48px] tracking-extra">
              -Connect, <span className="text-[#FF8C42]">Learn</span> & Aspire
           </p>
-          <p className="w-[34%] -translate-y-4 text-[18px] font-Inter text-[#17171799]">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
-          </p>
         </div>
         <div className="flex gap-10 p-4">
           <div className="w-[670px] h-[320px] bg-[#FF8C42] rounded-md">

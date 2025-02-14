@@ -13,6 +13,12 @@ export default {
       letterSpacing: {
         extra: '0.6rem'
       },
+      screens: {
+        sm: '640px',  // Custom small breakpoint
+        md: '768px',
+        lg:'1024px',  // Custom medium breakpoint
+        xl: '1280px', // Custom extra-large breakpoint
+      },
     },
   },
   plugins: [],

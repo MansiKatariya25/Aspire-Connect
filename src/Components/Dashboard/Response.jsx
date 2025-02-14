@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../App";
 
 function Response() {
-  const { question, setQue } = useContext(DataContext);
+  const { question, setQue ,dashboard ,setDashboard} = useContext(DataContext);
   const [parsedQuestions, setParsedQuestions] = useState([]);
 
   useEffect(() => {
     try {
       const cleanJson = question.response
-        .replace(/```json/g, "") 
-        .replace(/```/g, "") 
-        .trim(); 
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
 
       const parsedArray = JSON.parse(cleanJson);
       console.log(parsedArray);
@@ -22,9 +22,20 @@ function Response() {
     }
   }, [question]);
 
+  const handleClose = () => {
+    setDashboard(4)
+  };
+
   return (
     <div className="absolute z-20 w-screen h-screen bg-gray-950/30 backdrop-blur-[2px] flex justify-center items-center">
-      <div className="w-3/4 h-3/4 bg-white rounded-lg p-6 overflow-y-auto">
+      <div className="w-3/4 h-3/4 bg-white rounded-lg p-6 overflow-y-auto relative">
+        <button
+          onClick={handleClose} 
+          className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-gray-900"
+        >
+          &times;
+        </button>
+
         <h2 className="text-2xl font-bold mb-4">Interview Questions</h2>
         {parsedQuestions.length > 0 ? (
           <div className="space-y-4">

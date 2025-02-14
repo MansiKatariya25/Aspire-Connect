@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../App";
 import api from "../Config/axios";
+import { toast } from "react-toastify";
 
 function Profile({}) {
   const { userData, setUserData, setDashboard } = useContext(DataContext);
@@ -19,7 +20,6 @@ function Profile({}) {
 
       if (!file) return;
 
-      // Preview the file (Optional)
       const reader = new FileReader();
       reader.onload = (e) => {
         setUserData({ ...userData, profile_pic: e.target.result });
@@ -64,9 +64,9 @@ function Profile({}) {
       });
   
       if (response.status === 200) {
-        alert("Profile updated successfully!");
+        toast.success("Profile updated successfully!");
       } else {
-        alert("Failed to update profile.");
+        toast.error("Failed to update profile.");
       }
     } catch (error) {
       console.error("Error updating profile:", error.response?.data || error.message);
@@ -289,7 +289,7 @@ function Profile({}) {
                       onChange={(e) =>
                         setUserData({
                           ...userData,
-                          compAdress: e.target.value,
+                          compAddress: e.target.value,
                         })
                       }
                     />

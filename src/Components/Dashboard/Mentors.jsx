@@ -46,10 +46,16 @@ function Mentors() {
 
       return emails.includes(email.toLowerCase());
     });
-
     setChats(filtered);
     setDashboard(11);
   };
+
+const handleView = (post)=>{
+    setChats(post)
+    setDashboard(12)
+
+  }
+
   return (
     <div className="absolute w-[85vw] h-[92vh] p-6 right-0 bg-white">
       <div>

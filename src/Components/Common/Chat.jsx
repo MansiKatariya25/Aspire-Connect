@@ -7,7 +7,7 @@ function Chat() {
   const [newMessage, setNewMessage] = useState(""); // Input field value
   const { chats, userData } = useContext(DataContext); // Get current user data
   const intervalRef = useRef(null);
-  
+
   useEffect(() => {
     const fetchMessages = async () => {
       if (chats.length === 0) return; // Prevent unnecessary calls
@@ -45,7 +45,7 @@ function Chat() {
     if (newMessage.trim()) {
       const messageObject = {
         sender: userData.email,
-        receiver: chats[0]?.email|| chats?.user?.email,
+        receiver: chats[0]?.email || chats?.user?.email,
         content: newMessage,
       };
 
@@ -63,19 +63,32 @@ function Chat() {
       }
     }
   };
-
   return (
     <div className="absolute right-16 top-36 chat-box w-[75vw] h-[600px] bg-white border-2 border-orange-100 rounded-3xl shadow-md flex flex-col">
       {/* Header */}
       <div className="chat-header flex items-center gap-4 p-4 border-b border-gray-200">
         <img
-          src={chats[0]?.profile_pic || chats[0]?.user?.profile_pic|| chats?.user?.profile_pic}
-          alt={`${chats[0]?.fname || chats?.user?.fname + " " + chats[0]?.lname}'s profile`}
+          src={
+            chats[0]?.profile_pic ||
+            chats[0]?.user?.profile_pic ||
+            chats?.user?.profile_pic
+          }
+          alt={`${
+            chats[0]?.fname || chats?.user?.fname + " " + chats[0]?.lname
+          }'s profile`}
           className="w-10 h-10 rounded-full"
         />
         <p className="font-Manrope text-[16px] font-medium">
-          {chats[0]?.fname || chats?.user?.fname && chats[0]?.lname || chats?.user?.lname
-            ? `${chats[0]?.fname?.toUpperCase() || chats?.user?.fname?.toUpperCase()} ${chats[0]?.lname?.toUpperCase() || chats?.user?.lname?.toUpperCase()}`
+          {chats[0]?.fname ||
+          (chats?.user?.fname && chats[0]?.lname) ||
+          chats?.user?.lname
+            ? `${
+                chats[0]?.fname?.toUpperCase() ||
+                chats?.user?.fname?.toUpperCase()
+              } ${
+                chats[0]?.lname?.toUpperCase() ||
+                chats?.user?.lname?.toUpperCase()
+              }`
             : chats[0]?.user && chats[0]?.user?.fname && chats[0]?.user?.lname
             ? `${chats[0]?.user?.fname?.toUpperCase()} ${chats[0]?.user?.lname?.toUpperCase()}`
             : chats[0]?.fname

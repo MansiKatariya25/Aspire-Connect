@@ -14,6 +14,7 @@ import Posts from "../Company/Posts";
 import Notification from "../Common/Notification";
 import ChatDash from "../Common/ChatDash";
 import ViewersProfile from "../Common/ViewersProfile";
+import FetchJob from "./FetchJob";
 
 function Dashboard() {
   const { dashboard, setDashboard, userData } = useContext(DataContext);
@@ -47,6 +48,7 @@ function Dashboard() {
         {dashboard == 10 && <Notification />}
         {dashboard == 11 && <Chat />}
         {dashboard == 12 && <ViewersProfile />}
+        {dashboard == 13 && <FetchJob/>}
         {isLoading && <Loading />}
       </div>
     </div>
