@@ -84,9 +84,9 @@ function Jobs() {
               <p className="font-Inter text-[13px] font-medium">Filters</p>
             </div>
 
-            <p className="bg-[#0A65CC] text-white font-Inter text-[16px] font-medium p-2 px-4 cursor-pointer">
+            {/* <p className="bg-[#0A65CC] text-white font-Inter text-[16px] font-medium p-2 px-4 cursor-pointer">
               Find Job
-            </p>
+            </p> */}
           </div>
         </div>
 
