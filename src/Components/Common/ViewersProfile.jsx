@@ -142,7 +142,7 @@ export default function ViewersProfile() {
           {posts.map((post) => (
             <div
               key={post.id}
-              className="bg-white p-4 rounded-md shadow-md border w-2/3"
+              className="bg-white p-4 rounded-md shadow-md border w-[50%]"
             >
               <p className="text-gray-700">{post.content}</p>
               {post.image && (
