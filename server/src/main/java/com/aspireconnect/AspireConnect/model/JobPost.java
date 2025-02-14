@@ -1,16 +1,20 @@
 package com.aspireconnect.AspireConnect.model;
 
 import java.util.List;
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "JobPost")
+
 public class JobPost {
+    @Id
+    private String id;
     private String postedby;
     private String jobType;
     private String jobLocation;
     private String Stipend;
+  
     private String jobDescription;
     private String jobPosition;
     private String jobSkills;
@@ -18,13 +22,16 @@ public class JobPost {
     private String jobDuration;
     private String openings;
     private String otherRequirement;
-    private List<String> appliedUsers;
+
+    // Changed to List of AppliedUser instead of List<String> for applied users
+    private List<AppliedUser> appliedUsers;
+
     @DBRef
     private User user;
 
     public JobPost(String postedby, String jobType, String jobLocation, String Stipend, String jobDescription,
             String jobPosition, String jobSkills, String jobPerks, String jobDuration, String openings,
-            String otherRequirement, User user, List<String> appliedUsers) {
+            String otherRequirement, User user, List<AppliedUser> appliedUsers,String id) {
         this.postedby = postedby;
         this.jobType = jobType;
         this.jobLocation = jobLocation;
@@ -38,13 +45,24 @@ public class JobPost {
         this.otherRequirement = otherRequirement;
         this.user = user;
         this.appliedUsers = appliedUsers;
+        this.id  = id;
     }
 
-    public List<String> getAppliedUsers() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    // Getters and Setters
+    public List<AppliedUser> getAppliedUsers() {
         return appliedUsers;
     }
 
-    public void setAppliedUsers(List<String> appliedUsers) {
+    public void setAppliedUsers(List<AppliedUser> appliedUsers) {
         this.appliedUsers = appliedUsers;
     }
 
@@ -143,5 +161,4 @@ public class JobPost {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

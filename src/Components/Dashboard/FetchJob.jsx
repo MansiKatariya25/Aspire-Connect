@@ -12,7 +12,7 @@ function FetchJob() {
         if (response && response.data) {
           setJobs(response.data);
         } else {
-          console.log("No jobs found");
+        
         }
       } catch (error) {
         console.error("Error fetching job details:", error);
