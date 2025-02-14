@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PostAction from "./PostAction";
 import Content from "./Content";
 import api from "../Config/axios";
+import { DataContext } from "../../App";
 
 function Main() {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const { setDashboard, setChats } = useContext(DataContext);
   // Function to fetch users based on searchTerm
   useEffect(() => {
     if (searchTerm.length > 1) {
@@ -28,6 +29,11 @@ function Main() {
       setUsers([]); // Clear users if search term is too short
     }
   }, [searchTerm]);
+
+  const handleView = (post) => {
+    setChats(post);
+    setDashboard(12);
+  };
 
   return (
     <div className="flex justify-center items-center font-Manrope">
@@ -56,6 +62,7 @@ function Main() {
               <p className="text-gray-600 font-medium">Search Results:</p>
               {users.map((user) => (
                 <div
+                  onClick={() => handleView(user)}
                   key={user.id}
                   className="flex items-center gap-4 p-2 hover:bg-gray-100 rounded-md cursor-pointer"
                 >
@@ -65,7 +72,9 @@ function Main() {
                     className="w-[40px] h-[40px] rounded-full"
                   />
                   <div>
-                    <p className="font-medium">{user.fname.toUpperCase()} {user.lname.toUpperCase()}</p>
+                    <p className="font-medium">
+                      {user.fname.toUpperCase()} {user.lname.toUpperCase()}
+                    </p>
                     <p className="text-sm text-gray-500">{user.email}</p>
                   </div>
                 </div>
