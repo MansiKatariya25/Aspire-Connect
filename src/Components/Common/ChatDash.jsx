@@ -38,24 +38,24 @@ function ChatDash() {
             className="flex items-center p-4 border-b hover:bg-gray-100 cursor-pointer transition"
           >
             <img
-              src={chatUser.user.profile_pic || "/default-profile.png"}
-              alt={`${chatUser.user.fname} ${chatUser.user.lname}'s profile`}
+              src={chatUser?.user?.profile_pic || "/default-profile.png"}
+              alt={`${chatUser?.user?.fname} ${chatUser?.user?.lname}'s profile`}
               className="w-12 h-12 rounded-full mr-4"
             />
 
             <div className="flex-1">
               <p className="font-medium text-lg">
-                {chatUser.user.fname.toUpperCase()}{" "}
-                {chatUser.user.lname.toUpperCase()}
+                {chatUser?.user?.fname?.toUpperCase()}{" "}
+                {chatUser?.user?.lname?.toUpperCase()}
               </p>
 
               <p className="text-gray-600 text-sm truncate">
-                {chatUser.lastMessage}
+                {chatUser?.lastMessage}
               </p>
             </div>
 
             <p className="text-xs text-gray-500">
-              {new Date(chatUser.timestamp).toLocaleTimeString([], {
+              {new Date(chatUser?.timestamp).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
               })}

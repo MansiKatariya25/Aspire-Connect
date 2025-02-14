@@ -50,6 +50,12 @@ function Mentors() {
     setChats(filtered);
     setDashboard(11);
   };
+
+  const handleView = (post) => {
+    setChats(post);
+    setDashboard(12);
+  };
+
   return (
     <div className="absolute w-[85vw] h-[92vh] p-6 right-0 bg-white">
       <div>
@@ -82,14 +88,16 @@ function Mentors() {
           {filteredMentors.length > 0 ? (
             filteredMentors.map((mentor) => (
               <div
+            
                 key={mentor.id || mentor.fname.toUpperCase()} // Use a unique key
-                className="w-[300px] h-[450px] border rounded-lg p-2 flex flex-col justify-evenly items-center"
+                className="w-[300px] h-[500px] border rounded-lg p-2 flex flex-col justify-evenly items-center"
               >
                 {/* Mentor Profile Picture */}
                 <img
+                  onClick={()=>(handleView(mentor))}
                   src={mentor?.profile_pic || "default-avatar.png"} // Fallback to default avatar
                   alt={`${mentor.fname}'s profile`}
-                  className="rounded-full w-[300px] h-[300px]"
+                  className="rounded-full w-[250px] h-[250px] cursor-pointer"
                 />
 
                 {/* Mentor Info */}

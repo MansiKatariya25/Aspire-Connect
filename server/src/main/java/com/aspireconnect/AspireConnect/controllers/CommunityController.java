@@ -1,6 +1,7 @@
 package com.aspireconnect.AspireConnect.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,8 +12,11 @@ import com.aspireconnect.AspireConnect.service.CommunityService;
 import com.aspireconnect.AspireConnect.service.FileService;
 import com.aspireconnect.AspireConnect.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -58,7 +62,7 @@ public class CommunityController {
             User user = userService.getUserByEmail(email);
             entity.setUser(user);
             // Set default values for like, comment, and share
-            entity.setLike("0");
+            entity.setLikes(null);
             entity.setComment("0");
             entity.setShare("0");
 
@@ -110,17 +114,44 @@ public class CommunityController {
         }
     }
 
-    @PutMapping("/like/{id}")
-    public ResponseEntity<String> putLike(@PathVariable String id) {
+    @PutMapping("/like/{communityId}")
+    public ResponseEntity<String> putLike(@PathVariable String communityId) {
         try {
-            String isLike = communityService.likeById(id);
-            if (isLike == null) {
-                return ResponseEntity.ok("Post already liked");
-            }
-            return ResponseEntity.ok("Post liked successfully");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error liking post: " + e.getMessage());
-        }
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            // Call the like/unlike method from the service
+            String result = communityService.likeById(communityId, email);
 
+            if ("liked".equals(result)) {
+                return ResponseEntity.ok("Post liked successfully");
+            } else if ("unliked".equals(result)) {
+                return ResponseEntity.ok("Post unliked successfully");
+            } else if ("community_or_user_not_found".equals(result)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Community post or user not found");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error processing like/unlike request "+ result);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error liking/unliking post: " + e.getMessage());
+        }
     }
+
+    @PutMapping("/follow/{id}")
+    public ResponseEntity<String> addFollowers(@PathVariable String id) {
+        try {
+            // Retrieve the currently authenticated user's email from the security context
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+            // Call the service method to handle following a user
+            String response = communityService.followById(id, email);
+
+            // Return a successful response with a message
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // Return a bad request response with the error message
+            return ResponseEntity.badRequest().body("Error following user: " + e.getMessage());
+        }
+    }
+
 }

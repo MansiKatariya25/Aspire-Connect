@@ -3,7 +3,8 @@ import { DataContext } from "../../App";
 import api from "../Config/axios";
 
 function Profile({}) {
-  const { userData, setUserData, setDashboard } = useContext(DataContext);
+  const { userData, setUserData, setDashboard, setChats } =
+    useContext(DataContext);
   const [profile_pic, setProfilePic] = useState(
     "https://avatar.iran.liara.run/public"
   );
@@ -47,6 +48,11 @@ function Profile({}) {
     e.preventDefault();
   };
 
+  const handleView = (post) => {
+    setChats(post);
+    setDashboard(12);
+  };
+
   return (
     <div className="fixed font-Manrope z-50 bg-gray-700/30 backdrop-blur-sm w-screen h-screen flex justify-center items-center ">
       <div className="w-[60%] p-4 h-[90%] bg-white rounded-lg flex flex-col justify-evenly">
@@ -83,9 +89,13 @@ function Profile({}) {
               onClick={handleFileUpload}
             />
             <p>{userData.email}</p>
-            <div className="flex flex-col gap-2 items-center border p-2 rounded-lg">
-              <label className="text-gray-400 text-xl">Followers</label>
-              <p className="text-sm">{userData?.followers || "2006"}</p>
+            <div className="flex flex-col gap-2 items-center border p-2 rounded-full hover:border-b-4 transition-all duration-150">
+              <button
+                onClick={() => handleView(userData)}
+                className="text-orange-500 text-sm "
+              >
+                View Profile
+              </button>
             </div>
           </div>
           {/* <hr className="my-5" /> */}

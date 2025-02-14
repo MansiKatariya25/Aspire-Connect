@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @Document(collection = "community")
 public class Community {
 
@@ -14,7 +16,7 @@ public class Community {
     @DBRef
     private User user;
     private String email;
-    private String like = "0"; // Default value
+    private List<String> likes; // Changed to a list of user IDs
     private String comment = "0"; // Default value
     private String share = "0"; // Default value
     private String content;
@@ -55,12 +57,12 @@ public class Community {
         this.email = email;
     }
 
-    public String getLike() {
-        return like;
+    public List<String> getLikes() {
+        return likes;
     }
 
-    public void setLike(String like) {
-        this.like = like;
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
     }
 
     public String getComment() {
